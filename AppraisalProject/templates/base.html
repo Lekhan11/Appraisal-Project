@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}My Project{% endblock %}</title>
+</head>
+<body >
+
+<!-- Page Content -->
+<div class="container-fluid mt-0 p-0 mx-0 ">
+    {% block content %}{% endblock %}
+</div>
+
+
+</body>
+</html>
