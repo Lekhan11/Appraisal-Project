@@ -28,7 +28,8 @@ def Home(request):
     elif request.user.role=='hod':
         return render(request, 'hod/home.html', {'user': request.user})
     elif request.user.role=='faculty':
-        return render(request, 'faculty/home.html', {'user': request.user})
+        acadYear="2024-2025"
+        return render(request, 'faculty/home.html', {'user': request.user, 'acadYear': acadYear})
     else:
         return render(request,'404.html')
 

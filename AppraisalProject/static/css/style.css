@@ -1,8 +1,21 @@
-body {
-   background-color: #fefeff;
-}
-
+/* /* body {
+   background-color: #CAE8BD;
+} */
 .sideBar {
 
     height: 100vh;
+    background-color: #B0DB9C;
+}
+
+/* .topbar{
+    background-color: #DDF6D2;
+} */ 
+:root {
+  --primary: #4E73DF;
+  --secondary: #858796;
+  --success: #1CC88A;
+  --warning: #F6C23E;
+  --danger: #E74A3B;
+  --light-bg: #F8F9FC;
+  --dark-text: #5A5C69;
 }
