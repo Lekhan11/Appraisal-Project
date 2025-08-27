@@ -19,3 +19,11 @@
   --light-bg: #F8F9FC;
   --dark-text: #5A5C69;
 }
+
+.w-30 {
+  width: 30%
+}
+.content {
+    max-height: 80vh;
+    overflow-y: auto;
+}

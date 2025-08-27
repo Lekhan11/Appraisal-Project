@@ -31,6 +31,11 @@ AUTH_USER_MODEL = 'AppraisalProject.CreateUser'
 ALLOWED_HOSTS = []
 
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+
+
 # Application definition
 
 INSTALLED_APPS = [

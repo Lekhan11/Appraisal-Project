@@ -1,0 +1,43 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <input type="hidden" name="activityName" value="IAE">
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
+    <label for="firstYear">I year / II Sem (All Clear Students & Pass %)</label>
+    <input type="text" id="firstYear" name="firstYear" class="form-control mb-3">
+   
+    <label for="firstYearProof">Proof</label>
+    <input type="file" id="firstYearProof" name="firstYearProof" class="form-control mb-3">
+   
+       <!-- II year / IV Sem -->
+    <label for="secondYear">II year / IV Sem (All Clear Students & Pass %)</label>
+    <input type="text" id="secondYear" name="secondYear" class="form-control mb-3">
+   
+    <label for="secondYearProof">Proof</label>
+    <input type="file" id="secondYearProof" name="secondYearProof" class="form-control mb-3">
+
+    <label for="thirdYear">III year / VI Sem  (All Clear Students & Pass %)</label>
+    <input type="text" id="thirdYear" name="thirdYear" class="form-control mb-3">
+
+    <label for="thirdYearProof">Proof</label>
+    <input type="file" id="thirdYearProof" name="thirdYearProof" class="form-control mb-3">
+
+    <label for="fourthYear">IV year / VIII Sem  (All Clear Students & Pass %)</label>
+    <input type="text" id="fourthYear" name="fourthYear" class="form-control mb-3">
+
+    <label for="fourthYearProof">Proof</label>
+    <input type="file" id="fourthYearProof" name="fourthYearProof" class="form-control mb-3">
+
+    <label for="detail" >IAE Detail</label>
+    <select name="iaeDetail" id="detail" class="form-select mb-3" required>
+        <option value="" disabled selected>Select IAE Detail</option>
+        <option value="IAE 1">IAE 1</option>
+        <option value="IAE 2">IAE 2</option>
+        <option value="IAE 3">IAE 3</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary w-50 m-auto">Submit</button>
+</form>

@@ -3,6 +3,11 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import *
+import io
+from django.core.files.base import ContentFile
+from .utils import merge_uploads_to_pdf
+
 
 
 def Login(request):
@@ -21,16 +26,131 @@ def Login(request):
 
 @login_required(login_url='login')
 def Home(request):
+    departments = Department.objects.all()
+    activities = Activities.objects.all()
+    acadYear = "2024-2025"
+    department = request.POST.get('department')
+    month = request.POST.get('month')
+    activityName = None
+    submitted = False
+
+    if request.method == 'POST':
+        activityName = request.POST.get('activityName')
+        submitted = True   # first form submit aayiduchu
+
     if not request.user.is_authenticated:
         return redirect('login')
-    if request.user.role=='dean':
+
+    if request.user.role == 'dean':
         return render(request, 'dean/home.html', {'user': request.user})
-    elif request.user.role=='hod':
+
+    elif request.user.role == 'hod':
         return render(request, 'hod/home.html', {'user': request.user})
-    elif request.user.role=='faculty':
-        acadYear="2024-2025"
-        return render(request, 'faculty/home.html', {'user': request.user, 'acadYear': acadYear})
+
+    elif request.user.role == 'faculty':
+        return render(
+            request,
+            'faculty/home.html',
+            {
+                'user': request.user,
+                'acadYear': acadYear,
+                'departments': departments,
+                'activities': activities,
+                'department': department,
+                'month': month,
+                'submitted': submitted,
+                'activityName': activityName,
+            },
+        )
     else:
-        return render(request,'404.html')
+        return render(request, '404.html')
+
+    
+def submit_activity(request):
+    if request.method != 'POST':
+        return render(request, '404.html')
+
+    activityName = request.POST.get('activityName')
+    print("Got activityName:", repr(activityName))
+    department = request.POST.get("department")
+    month = request.POST.get("month")
 
 
+    proofs = []   # always define outside
+#IAE DETAILS
+    if activityName == "IAE":
+        proofs = [
+    request.FILES.get("firstYearProof"),
+    request.FILES.get("secondYearProof"),
+    request.FILES.get("thirdYearProof"),
+    request.FILES.get("fourthYearProof"),
+]
+        proofs = [f for f in proofs if f]  # filter None values
+        print(proofs)
+        merged_file_field = None
+        if proofs:
+            buf = io.BytesIO()
+            merge_uploads_to_pdf(proofs, buf)   # 👈 function implement pannano
+            buf.seek(0)
+            merged_file_field = ContentFile(buf.read(), name=f"IAE_{request.user.id}.pdf")
+        details = {
+            'firstYearPercent': request.POST.get("firstYear"),
+            'secondYearPercent': request.POST.get("secondYear"),
+            'thirdYearPercent': request.POST.get("thirdYear"),
+            'fourthYearPercent': request.POST.get("fourthYear"),
+            'iaeDetail': request.POST.get("iaeDetail"),
+        }
+        # save activity
+        try:
+            ActivitySubmission.objects.create(
+                user=request.user,
+                department=department,
+                month=month,
+                activity_name=activityName,
+                detail=details,
+                merged_proof=merged_file_field,
+        )
+            return render(request, 'faculty/home.html', {'activitySubmitted': True, 'activityName': activityName})
+        except Exception as e:
+            messages.error(request, 'There was an error submitting your activity. Please try again.')
+            return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
+#CAMU Attendance below 75%
+    elif activityName == "CAMU Attendance below 75 %":
+        proofs = [
+        request.FILES.get("firstYearProof"),
+        request.FILES.get("secondYearProof"),
+        request.FILES.get("thirdYearProof"),
+        request.FILES.get("fourthYearProof"),
+    ]
+        proofs = [f for f in proofs if f]  # filter None values
+
+        merged_file_field = None
+        if proofs:
+            buf = io.BytesIO()
+            merge_uploads_to_pdf(proofs, buf)   # 👈 function implement pannano
+            buf.seek(0)
+            merged_file_field = ContentFile(buf.read(), name=f"CAMU_{request.user.id}.pdf")
+        details = {
+            'firstYear': request.POST.get("firstYear"),
+            'secondYear': request.POST.get("secondYear"),
+            'thirdYear': request.POST.get("thirdYear"),
+            'fourthYear': request.POST.get("fourthYear"),
+        }
+        print("Merged file:", merged_file_field)
+        print("proofs:", proofs)
+    # save activity
+        try:
+            ActivitySubmission.objects.create(
+                user=request.user,
+                department=department,
+                month=month,
+                activity_name=activityName,
+                detail=details,
+                merged_proof=merged_file_field,
+            )
+            return render(request, 'faculty/home.html', {'activitySubmitted': True, 'activityName': activityName})
+        except Exception as e:
+            messages.error(request, 'There was an error submitting your activity. Please try again.')
+            return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
+    else:
+        return render(request, '404.html')
