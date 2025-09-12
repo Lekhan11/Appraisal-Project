@@ -49,7 +49,11 @@
                                     {% endfor %}
                                 </select>
                                 <label for="month">Month:</label>
-                                <input type="text" id="month" name="month" class="form-control mb-3">
+                               <select name="month" class="form-select mb-3">
+                                    {% for m in months %}
+                                        <option value="{{ m }}">{{ m }} </option>
+                                    {% endfor %}
+                                    </select>
 
                                 <label for="activityName">Activity Name:</label>
                                 <select name="activityName" id="activityName" class="form-select mb-3">

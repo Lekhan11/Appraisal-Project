@@ -8,11 +8,11 @@ class CustomUserAdmin(UserAdmin):
     list_display = ["username", "email", "department", "designation", "phone_number", "is_staff"]
 
     fieldsets = UserAdmin.fieldsets + (
-        (None, {"fields": ("department", "designation", "phone_number")}),
+        (None, {"fields": ("department", "designation", "phone_number","role","reports_to")}),
     )
 
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {"fields": ("department", "designation", "phone_number")}),
+        (None, {"fields": ("department", "designation", "phone_number","role","reports_to")}),
     )
 
 # @admin.register(UserProfile)

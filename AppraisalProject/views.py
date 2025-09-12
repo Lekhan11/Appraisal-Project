@@ -1,3 +1,4 @@
+import calendar
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
@@ -7,7 +8,7 @@ from .models import *
 import io
 from django.core.files.base import ContentFile
 from .utils import merge_uploads_to_pdf
-
+from datetime import datetime
 
 
 def Login(request):
@@ -28,7 +29,8 @@ def Login(request):
 def Home(request):
     departments = Department.objects.all()
     activities = Activities.objects.all()
-    acadYear = "2024-2025"
+    acadYear = f"Jan {datetime.now().year} - Dec {datetime.now().year}"
+    months = [calendar.month_name[i] for i in range(1, 13)]
     department = request.POST.get('department')
     month = request.POST.get('month')
     activityName = None
@@ -46,7 +48,8 @@ def Home(request):
         return render(request, 'dean/home.html', {'user': request.user})
 
     elif request.user.role == 'hod':
-        return render(request, 'hod/home.html', {'user': request.user})
+        totalFaculty = CreateUser.objects.filter(role='faculty', department=request.user.department).count()
+        return render(request, 'hod/home.html', {'user': request.user, 'totalFaculty': totalFaculty ,'acadYear': acadYear})
 
     elif request.user.role == 'faculty':
         return render(
@@ -59,6 +62,7 @@ def Home(request):
                 'activities': activities,
                 'department': department,
                 'month': month,
+                'months': months,
                 'submitted': submitted,
                 'activityName': activityName,
             },
@@ -107,7 +111,10 @@ def submit_activity(request):
             'thirdYear': request.POST.get("thirdYear"),
             'fourthYear': request.POST.get("fourthYear"),
         }
-#-----------------------------------------------------------------------------------------------------------
+
+#saturday
+
+#----------------------------------------------all activities above this line-------------------------------------------------------------
     proofs = [f for f in proofs if f]  # filter None values
     merged_file_field = None
     if proofs:
@@ -130,32 +137,3 @@ def submit_activity(request):
         messages.error(request, 'There was an error submitting your activity. Please try again.')
         print(e)
         return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
-# #CAMU Attendance below 75%
-   
-#         proofs = [f for f in proofs if f]  # filter None values
-
-#         merged_file_field = None
-#         if proofs:
-#             buf = io.BytesIO()
-#             merge_uploads_to_pdf(proofs, buf)   # 👈 function implement pannano
-#             buf.seek(0)
-#             merged_file_field = ContentFile(buf.read(), name=f"CAMU_{request.user.id}.pdf")
-       
-#         print("Merged file:", merged_file_field)
-#         print("proofs:", proofs)
-#     # save activity
-#         try:
-#             ActivitySubmission.objects.create(
-#                 user=request.user,
-#                 department=department,
-#                 month=month,
-#                 activity_name=activityName,
-#                 detail=details,
-#                 merged_proof=merged_file_field,
-#             )
-#             return render(request, 'faculty/home.html', {'activitySubmitted': True, 'activityName': activityName})
-#         except Exception as e:
-#             messages.error(request, 'There was an error submitting your activity. Please try again.')
-#             return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
-#     else:
-#         return render(request, '404.html')
