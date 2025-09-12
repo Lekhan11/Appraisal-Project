@@ -54,19 +54,13 @@
                                 <label for="activityName">Activity Name:</label>
                                 <select name="activityName" id="activityName" class="form-select mb-3">
                                     {% for activity in activities %}
-                                        <option value="{{ activity }}">{{ activity }}</option>
+                                        <option value="{{ activity.id }}">{{ activity }}</option>
                                     {% endfor %}
                                 </select>
                                 <button type="submit" class="btn btn-primary w-50 m-auto">Submit</button>
                             </form>
                         {% elif not activitySubmitted%}
-                            {% if activityName == "IAE" %}
-                                {% include 'activity/iae.html' %}
-                            {% elif activityName == "CAMU Attendance below 75 %" %}
-                                {% include 'activity/camu.html' %}
-                            {% elif activityName == "Non-Academic Activities" %}
-                                {% include 'activity/nonacademic.html' %}
-                            {% endif %}
+                            {% include 'activity/'|add:activityName|add:'.html' %}
                          {% elif activitySubmitted and not error %}
                             <div class="alert alert-success" role="alert">
                                 Your response has been submitted successfully!

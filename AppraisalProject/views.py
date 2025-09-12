@@ -36,6 +36,7 @@ def Home(request):
 
     if request.method == 'POST':
         activityName = request.POST.get('activityName')
+        print("Got activityName in Home:", repr(activityName))
         submitted = True   # first form submit aayiduchu
 
     if not request.user.is_authenticated:
@@ -74,25 +75,17 @@ def submit_activity(request):
     print("Got activityName:", repr(activityName))
     department = request.POST.get("department")
     month = request.POST.get("month")
-
-
+    activityRelation = Activities.objects.get(id=activityName)
+    departmentName=Department.objects.get(departmentName=department)
     proofs = []   # always define outside
 #IAE DETAILS
-    if activityName == "IAE":
+    if activityName == "1":
         proofs = [
     request.FILES.get("firstYearProof"),
     request.FILES.get("secondYearProof"),
     request.FILES.get("thirdYearProof"),
     request.FILES.get("fourthYearProof"),
 ]
-        proofs = [f for f in proofs if f]  # filter None values
-        print(proofs)
-        merged_file_field = None
-        if proofs:
-            buf = io.BytesIO()
-            merge_uploads_to_pdf(proofs, buf)   # 👈 function implement pannano
-            buf.seek(0)
-            merged_file_field = ContentFile(buf.read(), name=f"IAE_{request.user.id}.pdf")
         details = {
             'firstYearPercent': request.POST.get("firstYear"),
             'secondYearPercent': request.POST.get("secondYear"),
@@ -100,57 +93,69 @@ def submit_activity(request):
             'fourthYearPercent': request.POST.get("fourthYear"),
             'iaeDetail': request.POST.get("iaeDetail"),
         }
-        # save activity
-        try:
-            ActivitySubmission.objects.create(
-                user=request.user,
-                department=department,
-                month=month,
-                activity_name=activityName,
-                detail=details,
-                merged_proof=merged_file_field,
-        )
-            return render(request, 'faculty/home.html', {'activitySubmitted': True, 'activityName': activityName})
-        except Exception as e:
-            messages.error(request, 'There was an error submitting your activity. Please try again.')
-            return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
-#CAMU Attendance below 75%
-    elif activityName == "CAMU Attendance below 75 %":
+#camu
+    elif activityName == "2":
         proofs = [
         request.FILES.get("firstYearProof"),
         request.FILES.get("secondYearProof"),
         request.FILES.get("thirdYearProof"),
         request.FILES.get("fourthYearProof"),
     ]
-        proofs = [f for f in proofs if f]  # filter None values
-
-        merged_file_field = None
-        if proofs:
-            buf = io.BytesIO()
-            merge_uploads_to_pdf(proofs, buf)   # 👈 function implement pannano
-            buf.seek(0)
-            merged_file_field = ContentFile(buf.read(), name=f"CAMU_{request.user.id}.pdf")
         details = {
             'firstYear': request.POST.get("firstYear"),
             'secondYear': request.POST.get("secondYear"),
             'thirdYear': request.POST.get("thirdYear"),
             'fourthYear': request.POST.get("fourthYear"),
         }
-        print("Merged file:", merged_file_field)
-        print("proofs:", proofs)
-    # save activity
-        try:
-            ActivitySubmission.objects.create(
+#-----------------------------------------------------------------------------------------------------------
+    proofs = [f for f in proofs if f]  # filter None values
+    merged_file_field = None
+    if proofs:
+        buf = io.BytesIO()
+        merge_uploads_to_pdf(proofs, buf)   # 👈 function implement pannano
+        buf.seek(0)
+        merged_file_field = ContentFile(buf.read(), name=f"IAE_{request.user.id}.pdf")
+        # save activity
+    try:
+        ActivitySubmission.objects.create(
                 user=request.user,
-                department=department,
+                department=departmentName,
                 month=month,
-                activity_name=activityName,
+                activity_name=activityRelation,
                 detail=details,
                 merged_proof=merged_file_field,
-            )
-            return render(request, 'faculty/home.html', {'activitySubmitted': True, 'activityName': activityName})
-        except Exception as e:
-            messages.error(request, 'There was an error submitting your activity. Please try again.')
-            return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
-    else:
-        return render(request, '404.html')
+        )
+        return render(request, 'faculty/home.html', {'activitySubmitted': True, 'activityName': activityName})
+    except Exception as e:
+        messages.error(request, 'There was an error submitting your activity. Please try again.')
+        print(e)
+        return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
+# #CAMU Attendance below 75%
+   
+#         proofs = [f for f in proofs if f]  # filter None values
+
+#         merged_file_field = None
+#         if proofs:
+#             buf = io.BytesIO()
+#             merge_uploads_to_pdf(proofs, buf)   # 👈 function implement pannano
+#             buf.seek(0)
+#             merged_file_field = ContentFile(buf.read(), name=f"CAMU_{request.user.id}.pdf")
+       
+#         print("Merged file:", merged_file_field)
+#         print("proofs:", proofs)
+#     # save activity
+#         try:
+#             ActivitySubmission.objects.create(
+#                 user=request.user,
+#                 department=department,
+#                 month=month,
+#                 activity_name=activityName,
+#                 detail=details,
+#                 merged_proof=merged_file_field,
+#             )
+#             return render(request, 'faculty/home.html', {'activitySubmitted': True, 'activityName': activityName})
+#         except Exception as e:
+#             messages.error(request, 'There was an error submitting your activity. Please try again.')
+#             return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
+#     else:
+#         return render(request, '404.html')

@@ -1,7 +1,6 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
     {% csrf_token %}
 
-    <input type="hidden" name="activityName" value="CAMU Attendance below 75%">
     <input type="hidden" name="department" value="{{ department }}">
     <input type="hidden" name="month" value="{{ month }}">
     <input type="hidden" name="activityName" value="{{ activityName }}">
