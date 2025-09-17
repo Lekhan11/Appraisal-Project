@@ -1,0 +1,47 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+     <!-- Name of Faculty -->
+     <div class="mb-3">
+       <label for="faculty" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
+       <input type="text" id="faculty" name="faculty" class="form-control" placeholder="Enter faculty name" required>
+     </div>
+
+     <!-- Title of Patent -->
+     <div class="mb-3">
+       <label for="title" class="form-label">Type of the Event <span class="text-danger">*</span></label>
+       <input type="text" id="title" name="title" class="form-control" placeholder="Enter patent title" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="title" class="form-label">Title of the Event <span class="text-danger">*</span></label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Enter patent title" required>
+      </div>
+      
+     <!-- mode -->
+     <div class="mb-3">
+       <label for="mode" class="form-label">Organizer details <span class="text-danger">*</span></label>
+       <input type="text" id="mode" name="mode" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+      <label for="date" class="form-label">Date (From) <span class="text-danger">*</span></label>
+      <input type="date" id="date" name="date" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="date" class="form-label">Date (To) <span class="text-danger">*</span></label>
+        <input type="date" id="date" name="date" class="form-control" required>
+       </div>
+
+     <!-- Attach Proof -->
+     <div class="mb-3">
+       <label for="proof" class="form-label">Attach Certificates any proof <span class="text-danger">*</span></label>
+       <input type="file" id="proof" name="proof" class="form-control" required>
+     </div>
+
+     <!-- Submit Button -->
+     <div class="d-grid">
+       <button type="submit" class="btn btn-success">Submit</button>
+     </div>
+
+   </form>

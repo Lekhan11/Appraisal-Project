@@ -123,6 +123,78 @@ def submit_activity(request):
             'patentNumber': request.POST.get("patentNumber"),
             'patentStatus': request.POST.get("patentStatus"),
         }
+
+# Activite name 22
+    elif activityName == "22":
+        proofs = [
+            request.FILES.get("SupervisorOrder")
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'studentname': request.POST.get("studentname"),
+            'mode': request.POST.get("mode"),
+
+        }
+
+# Activite name 23
+    elif activityName == "23":
+        proofs = [
+            request.FILES.get("SupervisorOrder")
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'studentname': request.POST.get("studentname"),
+            'mode': request.POST.get("mode"),
+            
+        }
+
+# Activite name 24
+    elif activityName == "24":
+        proofs = [
+            request.FILES.get("SupervisorOrder")
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'studentname': request.POST.get("studentname"),
+            'mode': request.POST.get("mode"),
+            
+        }
+
+# Activite name 25
+    elif activityName == "25":
+        proofs = [
+            request.FILES.get("SupervisorOrder")
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'studentname': request.POST.get("studentname"),
+            'mode': request.POST.get("mode"),
+            
+        }
+
+# Activite name 26
+    elif activityName == "26":
+        proofs = [
+            request.FILES.get("SupervisorOrder")
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'studentname': request.POST.get("studentname"),
+            'mode': request.POST.get("mode"),
+            
+        }
+
+# Activite name 27
+    elif activityName == "27":
+        proofs = [
+            request.FILES.get("SupervisorOrder")
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'studentname': request.POST.get("studentname"),
+            'mode': request.POST.get("mode"),
+            
+        }                                        
 #----------------------------------------------all activities above this line-------------------------------------------------------------
     proofs = [f for f in proofs if f]  # filter None values
     merged_file_field = None
