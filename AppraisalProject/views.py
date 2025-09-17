@@ -113,7 +113,16 @@ def submit_activity(request):
         }
 
 #saturday
-
+#patent
+    elif activityName == "16":
+        proofs = [
+        request.FILES.get("patentProof"),
+    ]
+        details = {
+            'patentTitle': request.POST.get("patentTitle"),
+            'patentNumber': request.POST.get("patentNumber"),
+            'patentStatus': request.POST.get("patentStatus"),
+        }
 #----------------------------------------------all activities above this line-------------------------------------------------------------
     proofs = [f for f in proofs if f]  # filter None values
     merged_file_field = None
