@@ -1,0 +1,29 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+    
+    <label for="faculty" class="form-label">Name of Faculty <span class="text-danger">*</span></label>
+    <input type="text" id="faculty" name="faculty" class="form-control" required>
+
+    <!-- Industry Name -->
+    <label for="industry" class="form-label">Name of the Industry <span class="text-danger">*</span></label>
+    <input type="text" id="industry" name="industry" class="form-control" required>
+
+    <!-- From Date -->
+    <label for="fromDate" class="form-label">From Date <span class="text-danger">*</span></label>
+    <input type="date" id="fromDate" name="fromDate" class="form-control" required>
+
+    <!-- To Date -->
+    <label for="toDate" class="form-label">To Date <span class="text-danger">*</span></label>
+    <input type="date" id="toDate" name="toDate" class="form-control" required>
+
+    <!-- Photo Upload -->
+    <label for="photo" class="form-label">Photo (Geo tag) <span class="text-danger">*</span></label>
+    <input type="file" id="photo" name="photo" class="form-control" accept="image/*" required>
+
+    <!-- Certificate Upload -->
+    <label for="certificate" class="form-label">Certificate <span class="text-danger">*</span></label>
+    <input type="file" id="certificate" name="certificate" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+
+    <!-- Submit -->
+    <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>
+</form>

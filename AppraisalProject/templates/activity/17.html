@@ -1,0 +1,32 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <label for="faculty" class="form-label">Name of the Faculty</label>
+    <input type="text" id="faculty" name="faculty" class="form-control">
+    
+    <label for="title" class="form-label">Title of Consultancy Work <span class="text-danger">*</span></label>
+    <input type="text" id="title" name="title" class="form-control" required>
+
+    <label for="agency" class="form-label">Name of the Agency <span class="text-danger">*</span></label>
+    <input type="text" id="agency" name="agency" class="form-control" required>
+
+    <label for="fromDate" class="form-label">From Date <span class="text-danger">*</span></label>
+    <input type="date" id="fromDate" name="fromDate" class="form-control" required>
+
+    <label for="duration" class="form-label">Duration <span class="text-danger">*</span></label>
+    <input type="text" id="duration" name="duration" class="form-control" placeholder="e.g. 6 months" required>
+
+    <label for="amount" class="form-label">Amount Received <span class="text-danger">*</span></label>
+    <input type="number" id="amount" name="amount" class="form-control" min="0" step="0.01" required>
+
+    <label for="approvalProof" class="form-label">Attach Proof (Approval Letter)</label>
+    <input type="file" id="approvalProof" name="approvalProof" class="form-control">
+
+    <label for="completionProof" class="form-label">Attach Proof (Completion Report)</label>
+    <input type="file" id="completionProof" name="completionProof" class="form-control">
+
+    <label for="amountProof" class="form-label">Attach Proof (Amount Received Proof)</label>
+    <input type="file" id="amountProof" name="amountProof" class="form-control">
+
+    <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>
+</form>

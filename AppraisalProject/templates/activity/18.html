@@ -1,0 +1,35 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <label for="company" class="form-label">Name of the Company <span class="text-danger">*</span></label>
+    <input type="text" id="company" name="company" class="form-control" required>
+
+    <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
+    <input type="date" id="date" name="date" class="form-control" required>
+
+    <label for="duration" class="form-label">Duration in Years <span class="text-danger">*</span></label>
+    <input type="number" id="duration" name="duration" class="form-control" min="1" required>
+
+    <label for="coordinator1" class="form-label">Program Coordinator - 1 <span class="text-danger">*</span></label>
+    <input type="text" id="coordinator1" name="coordinator1" class="form-control" required>
+
+    <label for="coordinator2" class="form-label">Program Coordinator - 2 (if any)</label>
+    <input type="text" id="coordinator2" name="coordinator2" class="form-control">
+
+    <label for="activity" class="form-label">Name of the Activity</label>
+    <input type="text" id="activity" name="activity" class="form-control">
+
+    <label for="eventDate" class="form-label">Date of the Event</label>
+    <input type="date" id="eventDate" name="eventDate" class="form-control">
+
+    <label for="participants" class="form-label">No. of Participants</label>
+    <input type="number" id="participants" name="participants" class="form-control" min="1">
+
+    <label for="mouProof" class="form-label">Proof (MOU Agreement) <span class="text-danger">*</span></label>
+    <input type="file" id="mouProof" name="mouProof" class="form-control" required>
+
+    <label for="mouPhoto" class="form-label">Proof (MOU Signing Photo) <span class="text-danger">*</span></label>
+    <input type="file" id="mouPhoto" name="mouPhoto" class="form-control" required>
+
+    <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>
+</form>

@@ -1,0 +1,54 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <!-- Title -->
+    <label for="title" class="form-label">Title of the Event <span class="text-danger">*</span></label>
+    <input type="text" id="title" name="title" class="form-control" required>
+
+    <!-- Resource Person -->
+    <label for="resourcePerson" class="form-label">Name of the Resource Person <span class="text-danger">*</span></label>
+    <input type="text" id="resourcePerson" name="resourcePerson" class="form-control" required>
+
+    <!-- Designation & Organization -->
+    <label for="designation" class="form-label">Designation and Name of the Organization <span class="text-danger">*</span></label>
+    <input type="text" id="designation" name="designation" class="form-control" required>
+
+    <!-- Phone -->
+    <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+    <input type="text" id="phone" name="phone" class="form-control" required>
+
+    <!-- Email -->
+    <label for="email" class="form-label">Mail ID <span class="text-danger">*</span></label>
+    <input type="email" id="email" name="email" class="form-control" required>
+
+    <!-- Coordinator 1 -->
+    <label for="coordinator1" class="form-label">Program Coordinator - 1 <span class="text-danger">*</span></label>
+    <input type="text" id="coordinator1" name="coordinator1" class="form-control" required>
+
+    <!-- Coordinator 2 -->
+    <label for="coordinator2" class="form-label">Program Coordinator - 2 (if any)</label>
+    <input type="text" id="coordinator2" name="coordinator2" class="form-control">
+
+    <!-- Resource Profile -->
+    <label for="profile" class="form-label">Attach Resource Person Profile <span class="text-danger">*</span></label>
+    <input type="file" id="profile" name="profile" class="form-control" required>
+
+    <!-- Event Date -->
+    <label for="eventDate" class="form-label">Date of Event <span class="text-danger">*</span></label>
+    <input type="date" id="eventDate" name="eventDate" class="form-control" required>
+
+    <!-- Participants -->
+    <label for="participants" class="form-label">Number of Participants <span class="text-danger">*</span></label>
+    <input type="number" id="participants" name="participants" class="form-control" min="1" required>
+
+    <!-- PDF Upload -->
+    <label for="pdfAttachment" class="form-label">Attachment PDF (Permission letter, Circular, Brochure, Invitation, Geo tag Photos, Participant list, Summary, Feedback) <span class="text-danger">*</span></label>
+    <input type="file" id="pdfAttachment" name="pdfAttachment" accept=".pdf" class="form-control" required>
+
+    <!-- Word Upload -->
+    <label for="wordAttachment" class="form-label">Attachment Word Copy in Color (Permission letter, Circular, Brochure, Invitation, Geo tag Photos, Participant list, Summary, Feedback) <span class="text-danger">*</span></label>
+    <input type="file" id="wordAttachment" name="wordAttachment" accept=".doc,.docx" class="form-control" required>
+
+    <!-- Submit -->
+    <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>
+</form>

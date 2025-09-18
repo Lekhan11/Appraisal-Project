@@ -1,0 +1,47 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <!-- Faculty Name -->
+    <label for="faculty" class="form-label">Name of the Faculty</label>
+    <input type="text" id="faculty" name="faculty" class="form-control">
+
+    <!-- Event Type -->
+    <label for="eventType" class="form-label">Type of the Event</label>
+    <select id="eventType" name="eventType" class="form-control">
+        <option value="" disabled selected>Select Type</option>
+        <option value="Symposium">Symposium</option>
+        <option value="Contest">Contest</option>
+        <option value="Conference">Conference</option>
+        <option value="Sports">Sports</option>
+        <option value="Cultural">Cultural</option>
+        <option value="Workshop">Workshop</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <!-- Title -->
+    <label for="title" class="form-label">Title of the Event</label>
+    <input type="text" id="title" name="title" class="form-control">
+
+    <!-- Organizer -->
+    <label for="organizer" class="form-label">Organizer Details</label>
+    <input type="text" id="organizer" name="organizer" class="form-control">
+
+    <!-- Date From -->
+    <label for="fromDate" class="form-label">Date (From)</label>
+    <input type="date" id="fromDate" name="fromDate" class="form-control">
+
+    <!-- Date To -->
+    <label for="toDate" class="form-label">Date (To)</label>
+    <input type="date" id="toDate" name="toDate" class="form-control">
+
+    <!-- Excel Sheet -->
+    <label for="xlSheet" class="form-label">Attach XL Sheet (S.No, Faculty Name, Title, Date, Place, Prize)</label>
+    <input type="file" id="xlSheet" name="xlSheet" class="form-control" accept=".xls,.xlsx">
+
+    <!-- Certificates -->
+    <label for="certificates" class="form-label">Attach Certificates in PDF Format (in XL sheet order) <span class="text-danger">*</span></label>
+    <input type="file" id="certificates" name="certificates" class="form-control" accept=".pdf" multiple required>
+
+    <!-- Submit -->
+    <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>
+</form>
