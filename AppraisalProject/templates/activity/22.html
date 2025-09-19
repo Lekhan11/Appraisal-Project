@@ -1,22 +1,41 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
     {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+    
      <!-- Name of Faculty -->
      <div class="mb-3">
-       <label for="faculty" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
-       <input type="text" id="faculty" name="faculty" class="form-control" placeholder="Enter faculty name" required>
+       <label for="facultyname" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
+       <input type="text" id="facultyname" name="facultyname" class="form-control" placeholder="" required>
      </div>
 
      <!-- Title of Patent -->
      <div class="mb-3">
-       <label for="title" class="form-label">Name of the Reg. Student <span class="text-danger">*</span></label>
-       <input type="text" id="title" name="title" class="form-control" placeholder="Enter patent title" required>
+       <label for="noofregstud" class="form-label">Name of the Reg. Student <span class="text-danger">*</span></label>
+       <input type="text" id="noofregstud" name="noofregstud" class="form-control" placeholder="" required>
      </div>
 
      <!-- mode -->
      <div class="mb-3">
-       <label for="mode" class="form-label">Mode <span class="text-danger">*</span></label>
-       <input type="text" id="mode" name="mode" class="form-control" required>
-     </div>
+        <label for="mode" class="form-label">Mode <span class="text-danger">*</span></label>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="mode" id="flexRadioDefault1" value="Full Time" required>
+          <label class="form-check-label" for="flexRadioDefault1">
+            Full Time
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="mode" id="flexRadioDefault2" value="Part Time">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Part Time
+          </label>
+        </div>
+      </div>
+
 
      <div class="mb-3">
       <label for="date" class="form-label">Month and Year of Reg. <span class="text-danger">*</span></label>
@@ -25,8 +44,8 @@
 
      <!-- Attach Proof -->
      <div class="mb-3">
-       <label for="proof" class="form-label">Supervisor order <span class="text-danger">*</span></label>
-       <input type="file" id="proof" name="proof" class="form-control" required>
+       <label for="supervisororder" class="form-label">Supervisor order <span class="text-danger">*</span></label>
+       <input type="file" id="supervisororder" name="supervisororder" class="form-control" required>
      </div>
 
      <!-- Submit Button -->

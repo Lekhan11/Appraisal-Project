@@ -1,31 +1,36 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
     {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
      <!-- Name of Faculty -->
      <div class="mb-3">
-       <label for="faculty" class="form-label">Title of the Grant <span class="text-danger">*</span></label>
-       <input type="text" id="faculty" name="faculty" class="form-control" placeholder="Enter faculty name" required>
+       <label for="titleofgrant" class="form-label">Title of the Grant <span class="text-danger">*</span></label>
+       <input type="text" id="titleofgrant" name="titleofgrant" class="form-control" placeholder="" required>
      </div>
 
      <!-- Title of Patent -->
      <div class="mb-3">
-       <label for="title" class="form-label">Fund Applied in Rs <span class="text-danger">*</span></label>
-       <input type="text" id="title" name="title" class="form-control" placeholder="Enter patent title" required>
+       <label for="fundappliedin" class="form-label">Fund Applied in Rs <span class="text-danger">*</span></label>
+       <input type="text" id="fundappliedin" name="fundappliedin" class="form-control" placeholder="" required>
      </div>
 
      <!-- mode -->
      <div class="mb-3">
-       <label for="mode" class="form-label">Name of the funding Agency <span class="text-danger">*</span></label>
-       <input type="text" id="mode" name="mode" class="form-control" required>
+       <label for="nameoffundingagency" class="form-label">Name of the funding Agency <span class="text-danger">*</span></label>
+       <input type="text" id="nameoffundingagency" name="nameoffundingagency" class="form-control" required>
      </div>
 
      <div class="mb-3">
-        <label for="mode" class="form-label">Name of the funding Applied for Funding <span class="text-danger">*</span></label>
-        <input type="text" id="mode" name="mode" class="form-control" required>
+        <label for="nameoffacultyappliedfunding" class="form-label">Name of the funding Applied for Funding <span class="text-danger">*</span></label>
+        <input type="text" id="nameoffacultyappliedfunding" name="nameoffacultyappliedfunding" class="form-control" required>
       </div>
 
       <div class="mb-3">
-        <label for="mode" class="form-label">Fund Received <span class="text-danger">*</span></label>
-        <input type="text" id="mode" name="mode" class="form-control" required>
+        <label for="fundreceived" class="form-label">Fund Received <span class="text-danger">*</span></label>
+        <input type="text" id="fundreceived" name="fundreceived" class="form-control" required>
       </div>
 
      <div class="mb-3">
@@ -34,8 +39,8 @@
      </div>
 
      <div class="mb-3">
-        <label for="mode" class="form-label">Duration of Research <span class="text-danger">*</span></label>
-        <input type="text" id="mode" name="mode" class="form-control" required>
+        <label for="durationofresearch" class="form-label">Duration of Research <span class="text-danger">*</span></label>
+        <input type="text" id="durationofresearch" name="durationofresearch" class="form-control" required>
       </div>
 
      <!-- Attach Proof -->

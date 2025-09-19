@@ -1,36 +1,54 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
     {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
      <!-- Name of Faculty -->
      <div class="mb-3">
-       <label for="faculty" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
-       <input type="text" id="faculty" name="faculty" class="form-control" placeholder="Enter faculty name" required>
+       <label for="facultyname" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
+       <input type="text" id="facultyname" name="facultyname" class="form-control" placeholder="" required>
      </div>
 
      <!-- Title of Patent -->
      <div class="mb-3">
-       <label for="title" class="form-label">Type of the event <span class="text-danger">*</span></label>
-       <input type="text" id="title" name="title" class="form-control" placeholder="Enter patent title" required>
-     </div>
+        <label for="eventtype" class="form-label">Type of the Event <span class="text-danger">*</span></label>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="eventtype" id="flexRadioDefault1" value="Industry level" required>
+          <label class="form-check-label" for="flexRadioDefault1">
+            Industry Level
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="eventtype" id="flexRadioDefault2" value="Collaborative Level">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Collaborative Level
+          </label>
+        </div>
+      </div>
 
      <!-- mode -->
      <div class="mb-3">
-       <label for="mode" class="form-label">Title of the event <span class="text-danger">*</span></label>
-       <input type="text" id="mode" name="mode" class="form-control" required>
+       <label for="eventtitle" class="form-label">Title of the event <span class="text-danger">*</span></label>
+       <input type="text" id="eventtitle" name="eventtitle" class="form-control" required>
      </div>
 
      <div class="mb-3">
-      <label for="date" class="form-label">Date (From) <span class="text-danger">*</span></label>
-      <input type="date" id="date" name="date" class="form-control" required>
+      <label for="datefrom" class="form-label">Date (From) <span class="text-danger">*</span></label>
+      <input type="date" id="datefrom" name="datefrom" class="form-control" required>
      </div>
 
      <div class="mb-3">
-        <label for="date" class="form-label">Date (To) <span class="text-danger">*</span></label>
-        <input type="date" id="date" name="date" class="form-control" required>
+        <label for="dateto" class="form-label">Date (To) <span class="text-danger">*</span></label>
+        <input type="date" id="dateto" name="dateto" class="form-control" required>
        </div>
 
        <div class="mb-3">
-        <label for="mode" class="form-label">Name of the Organizer <span class="text-danger">*</span></label>
-        <input type="text" id="mode" name="mode" class="form-control" required>
+        <label for="organizer" class="form-label">Name of the Organizer <span class="text-danger">*</span></label>
+        <input type="text" id="organizer" name="organizer" class="form-control" required>
        </div>
 
      <!-- Attach Proof -->
@@ -40,8 +58,8 @@
      </div>
 
      <div class="mb-3">
-        <label for="proof" class="form-label">Upload Permission Letter if Online Mode / Upload OD Letter if Offline Mode <span class="text-danger">*</span></label>
-        <input type="file" id="proof" name="proof" class="form-control" required>
+        <label for="Permissionletter" class="form-label">Upload Permission Letter if Online Mode / Upload OD Letter if Offline Mode <span class="text-danger">*</span></label>
+        <input type="file" id="Permissionletter" name="Permissionletter" class="form-control" required>
       </div>
 
      <!-- Submit Button -->

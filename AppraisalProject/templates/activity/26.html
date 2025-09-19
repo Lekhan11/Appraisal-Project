@@ -1,48 +1,53 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
     {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
      <!-- Name of Faculty -->
      <div class="mb-3">
-       <label for="faculty" class="form-label">Name of the student <span class="text-danger">*</span></label>
-       <input type="text" id="faculty" name="faculty" class="form-control" placeholder="Enter faculty name" required>
+       <label for="studentname" class="form-label">Name of the student <span class="text-danger">*</span></label>
+       <input type="text" id="studentname" name="studentname" class="form-control" placeholder="" required>
      </div>
 
      <!-- Title of Patent -->
      <div class="mb-3">
-       <label for="title" class="form-label">Name of the Industry <span class="text-danger">*</span></label>
-       <input type="text" id="title" name="title" class="form-control" placeholder="Enter patent title" required>
+       <label for="industryname" class="form-label">Name of the Industry <span class="text-danger">*</span></label>
+       <input type="text" id="industryname" name="industryname" class="form-control" placeholder="" required>
      </div>
 
      <div class="mb-3">
-      <label for="date" class="form-label">Date (From) <span class="text-danger">*</span></label>
-      <input type="date" id="date" name="date" class="form-control" required>
+      <label for="datefrom" class="form-label">Date (From) <span class="text-danger">*</span></label>
+      <input type="date" id="datefrom" name="datefrom" class="form-control" required>
      </div>
 
      <div class="mb-3">
-        <label for="date" class="form-label">Date (To) <span class="text-danger">*</span></label>
-        <input type="date" id="date" name="date" class="form-control" required>
+        <label for="dateto" class="form-label">Date (To) <span class="text-danger">*</span></label>
+        <input type="date" id="dateto" name="dateto" class="form-control" required>
      </div>
 
      <!-- mode -->
      <div class="mb-3">
-       <label for="mode" class="form-label">Name of the Mentor <span class="text-danger">*</span></label>
-       <input type="text" id="mode" name="mode" class="form-control" required>
+       <label for="mentorname" class="form-label">Name of the Mentor <span class="text-danger">*</span></label>
+       <input type="text" id="mentorname" name="mentorname" class="form-control" required>
      </div>
 
 
      <!-- Attach Proof -->
      <div class="mb-3">
-       <label for="proof" class="form-label">Internship photo Evidence <span class="text-danger">*</span></label>
-       <input type="file" id="proof" name="proof" class="form-control" required>
+       <label for="internshipphotoevidence" class="form-label">Internship photo Evidence <span class="text-danger">*</span></label>
+       <input type="file" id="internshipphotoevidence" name="internshipphotoevidence" class="form-control" required>
      </div>
 
      <div class="mb-3">
-        <label for="proof" class="form-label">Attach XI file (S.No, Name of the student, Date(From-To),Industry Name) <span class="text-danger">*</span></label>
-        <input type="file" id="proof" name="proof" class="form-control" required>
+        <label for="attachxlfile" class="form-label">Attach XI file (S.No, Name of the student, Date(From-To),Industry Name) <span class="text-danger">*</span></label>
+        <input type="file" id="attachxlfile" name="attachxlfile" class="form-control" required>
       </div>
 
       <div class="mb-3">
-        <label for="proof" class="form-label">Certificate pdf <span class="text-danger">*</span></label>
-        <input type="file" id="proof" name="proof" class="form-control" required>
+        <label for="certificatepdf" class="form-label">Certificate pdf <span class="text-danger">*</span></label>
+        <input type="file" id="certificatepdf" name="certificatepdf" class="form-control" required>
       </div>
 
      <!-- Submit Button -->

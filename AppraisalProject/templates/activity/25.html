@@ -1,36 +1,84 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
     {% csrf_token %}
+    
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
      <!-- Name of Faculty -->
      <div class="mb-3">
-       <label for="faculty" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
-       <input type="text" id="faculty" name="faculty" class="form-control" placeholder="Enter faculty name" required>
+       <label for="facultyname" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
+       <input type="text" id="facultyname" name="facultyname" class="form-control" placeholder="" required>
      </div>
 
-     <!-- Title of Patent -->
-     <div class="mb-3">
-       <label for="title" class="form-label">Type of the Event <span class="text-danger">*</span></label>
-       <input type="text" id="title" name="title" class="form-control" placeholder="Enter patent title" required>
-     </div>
+    <div class="mb-3">
+        <label for="eventtype" class="form-label">Type of the Event <span class="text-danger">*</span></label>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="mode" id="flexRadioDefault1" value="Symposium" required>
+          <label class="form-check-label" for="flexRadioDefault1">
+            Symposium
+          </label>
+        </div>
 
-     <div class="mb-3">
-        <label for="title" class="form-label">Title of the Event <span class="text-danger">*</span></label>
-        <input type="text" id="title" name="title" class="form-control" placeholder="Enter patent title" required>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="mode" id="flexRadioDefault2" value="Contest">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Contest
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="mode" id="flexRadioDefault2" value="Conference">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Conference
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="mode" id="flexRadioDefault2" value="Sports">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Sports
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="mode" id="flexRadioDefault2" value="Cultural">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Cultural
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="mode" id="flexRadioDefault2" value="Workshop">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Workshop
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="mode" id="flexRadioDefault2" value="Other">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Other
+          </label>
+        </div>
       </div>
+
+      <div class="mb-3">
+       <label for="eventtitle" class="form-label">Title of the Event <span class="text-danger">*</span></label>
+       <input type="text" id="eventtitle" name="eventtitle" class="form-control" required>
+     </div>
       
      <!-- mode -->
      <div class="mb-3">
-       <label for="mode" class="form-label">Organizer details <span class="text-danger">*</span></label>
-       <input type="text" id="mode" name="mode" class="form-control" required>
+       <label for="organizerdetails" class="form-label">Organizer details <span class="text-danger">*</span></label>
+       <input type="text" id="organizerdetails" name="organizerdetails" class="form-control" required>
      </div>
 
      <div class="mb-3">
-      <label for="date" class="form-label">Date (From) <span class="text-danger">*</span></label>
-      <input type="date" id="date" name="date" class="form-control" required>
+      <label for="datefrom" class="form-label">Date (From) <span class="text-danger">*</span></label>
+      <input type="date" id="datefrom" name="datefrom" class="form-control" required>
      </div>
 
      <div class="mb-3">
-        <label for="date" class="form-label">Date (To) <span class="text-danger">*</span></label>
-        <input type="date" id="date" name="date" class="form-control" required>
+        <label for="dateto" class="form-label">Date (To) <span class="text-danger">*</span></label>
+        <input type="date" id="dateto" name="dateto" class="form-control" required>
        </div>
 
      <!-- Attach Proof -->
