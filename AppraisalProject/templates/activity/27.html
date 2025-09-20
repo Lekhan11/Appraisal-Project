@@ -1,0 +1,57 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
+     <!-- Name of Faculty -->
+     <div class="mb-3">
+       <label for="studentname" class="form-label">Name of the Students <span class="text-danger">*</span></label>
+       <input type="text" id="studentname" name="studentname" class="form-control" placeholder="" required>
+     </div>
+
+     <!-- Title of Patent -->
+     <div class="mb-3">
+       <label for="nameinternalguide" class="form-label">Name Internal Guide <span class="text-danger">*</span></label>
+       <input type="text" id="nameinternalguide" name="nameinternalguide" class="form-control" placeholder="" required>
+     </div>
+
+     <!-- mode -->
+     <div class="mb-3">
+       <label for="nameoftheindustywithaddress" class="form-label">Name of the Industry with address <span class="text-danger">*</span></label>
+       <input type="text" id="nameoftheindustywithaddress" name="nameoftheindustywithaddress" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+      <label for="datefrom" class="form-label">Date (From) <span class="text-danger">*</span></label>
+      <input type="date" id="datefrom" name="datefrom" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="dateto" class="form-label">Date (To) <span class="text-danger">*</span></label>
+        <input type="date" id="dateto" name="dateto" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="mentorname" class="form-label">Name of the Mentor <span class="text-danger">*</span></label>
+        <input type="text" id="mentorname" name="mentorname" class="form-control" required>
+     </div>
+     
+     <!-- Attach Proof -->
+     <div class="mb-3">
+       <label for="attachcertificate" class="form-label">Attach Certificate <span class="text-danger">*</span></label>
+       <input type="file" id="attachcertificate" name="attachcertificate" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="attachreport" class="form-label">Attach Report <span class="text-danger">*</span></label>
+        <input type="file" id="attachreport" name="attachreport" class="form-control" required>
+     </div>
+
+     <!-- Submit Button -->
+     <div class="d-grid">
+       <button type="submit" class="btn btn-success">Submit</button>
+     </div>
+
+   </form>

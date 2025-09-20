@@ -1,0 +1,57 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
+     <!-- Name of Faculty -->
+     <div class="mb-3">
+       <label for="titleofgrant" class="form-label">Title of the Grant <span class="text-danger">*</span></label>
+       <input type="text" id="titleofgrant" name="titleofgrant" class="form-control" placeholder="" required>
+     </div>
+
+     <!-- Title of Patent -->
+     <div class="mb-3">
+       <label for="fundappliedin" class="form-label">Fund Applied in Rs <span class="text-danger">*</span></label>
+       <input type="text" id="fundappliedin" name="fundappliedin" class="form-control" placeholder="" required>
+     </div>
+
+     <!-- mode -->
+     <div class="mb-3">
+       <label for="nameoffundingagency" class="form-label">Name of the funding Agency <span class="text-danger">*</span></label>
+       <input type="text" id="nameoffundingagency" name="nameoffundingagency" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="nameoffacultyappliedfunding" class="form-label">Name of the funding Applied for Funding <span class="text-danger">*</span></label>
+        <input type="text" id="nameoffacultyappliedfunding" name="nameoffacultyappliedfunding" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="fundreceived" class="form-label">Fund Received <span class="text-danger">*</span></label>
+        <input type="text" id="fundreceived" name="fundreceived" class="form-control" required>
+      </div>
+
+     <div class="mb-3">
+      <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
+      <input type="date" id="date" name="date" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="durationofresearch" class="form-label">Duration of Research <span class="text-danger">*</span></label>
+        <input type="text" id="durationofresearch" name="durationofresearch" class="form-control" required>
+      </div>
+
+     <!-- Attach Proof -->
+     <div class="mb-3">
+       <label for="proof" class="form-label">Attach Proof (Applied / Received Proposal, Utilization Certificate if any) <span class="text-danger">*</span></label>
+       <input type="file" id="proof" name="proof" class="form-control" required>
+     </div>
+
+     <!-- Submit Button -->
+     <div class="d-grid">
+       <button type="submit" class="btn btn-success">Submit</button>
+     </div>
+
+   </form>

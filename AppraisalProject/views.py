@@ -113,7 +113,106 @@ def submit_activity(request):
         }
 
 #saturday
+#patent
+    elif activityName == "16":
+        proofs = [
+        request.FILES.get("patentProof"),
+    ]
+        details = {
+            'patentTitle': request.POST.get("patentTitle"),
+            'patentNumber': request.POST.get("patentNumber"),
+            'patentStatus': request.POST.get("patentStatus"),
+        }
 
+# Activite name 22
+    elif activityName == "22":
+        proofs = [
+            request.FILES.get("supervisororder")
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'noofregstud': request.POST.get("noofregstud"),
+            'mode': request.POST.get("mode"),
+            'date': request.POST.get("date"),
+
+        }
+
+# Activite name 23
+    elif activityName == "23":
+        proofs = [
+            request.FILES.get("SupervisorOrder"),
+            request.FILES.get("Permissionletter")
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'eventtype': request.POST.get("eventtype"),
+            'eventtitle': request.POST.get("eventtitle"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+            'organizer': request.POST.get("organizer"),
+            
+        }
+
+# Activite name 24
+    elif activityName == "24":
+        proofs = [
+            request.FILES.get("proof")
+        ]
+        details = {
+            'titleofgrant': request.POST.get("titleofgrant"),
+            'fundappliedin': request.POST.get("fundappliedin"),
+            'nameoffundingagency': request.POST.get("nameoffundingagency"),
+            'nameoffacultyappliedfunding': request.POST.get("nameoffacultyappliedfunding"),
+            'fundreceived': request.POST.get("fundreceived"),
+            'date': request.POST.get("date"),
+            'durationofresearch': request.POST.get("durationofresearch"),
+        }
+
+# Activite name 25
+    elif activityName == "25":
+        proofs = [
+            request.FILES.get("proof")
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'eventtype': request.POST.get("eventtype"),
+            'eventtitle': request.POST.get("eventtitle"),
+            'organizer_details': request.POST.get("organizerdetails"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+        }
+
+# Activite name 26
+    elif activityName == "26":
+        proofs = [
+            request.FILES.get("internshipphotoevidence"),
+            request.FILES.get("attachxlfile"),
+            request.FILES.get("certificatepdf")
+        ]
+        details = {
+            'studentname': request.POST.get("studentname"),
+            'industryname': request.POST.get("industryname"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+            'mentorname': request.POST.get("mentorname"),
+            
+        }
+
+# Activite name 27
+    elif activityName == "27":
+        proofs = [
+            request.FILES.get("attachcertificate"),
+            request.FILES.get("attachreport")
+        ]
+        details = {
+            'studentname': request.POST.get("studentname"),
+            'nameinternalguide': request.POST.get("nameinternalguide"),
+            'nameoftheindustywithaddress': request.POST.get("nameoftheindustywithaddress"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+            'mentorname': request.POST.get("mentorname"),
+            
+        }                                        
 #----------------------------------------------all activities above this line-------------------------------------------------------------
     proofs = [f for f in proofs if f]  # filter None values
     merged_file_field = None
