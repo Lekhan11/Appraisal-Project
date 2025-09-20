@@ -13,7 +13,11 @@ __pycache__/
 
 # Environments
 .env
+<<<<<<< HEAD
 .venv/
+=======
+venv/
+>>>>>>> 90dd81b83c4f4391c9a8be7f71432a0757628abb
 env/
 
 # IDE / Editor
