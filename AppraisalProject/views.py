@@ -213,7 +213,6 @@ def submit_activity(request):
             'mentorname': request.POST.get("mentorname"),
             
         }                                        
-        }
 
 #consultancy
     elif activityName == "17":
