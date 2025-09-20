@@ -28,7 +28,7 @@ DEBUG = True
 AUTH_USER_MODEL = 'AppraisalProject.CreateUser'
 
 
-ALLOWED_HOSTS = ['192.168.220.163', '127.0.0.1', ]
+ALLOWED_HOSTS = ['192.168.220.163', '128.0.0.1']
 
 
 MEDIA_URL = "/media/"
