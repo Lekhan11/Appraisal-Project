@@ -1,0 +1,57 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
+     <!-- Name of Faculty -->
+     <div class="mb-3">
+       <label for="studentname" class="form-label">Name of the Students <span class="text-danger">*</span></label>
+       <input type="text" id="studentname" name="studentname" class="form-control" placeholder="" required>
+     </div>
+
+     <!-- Title of Patent -->
+     <div class="mb-3">
+       <label for="facultyname" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
+       <input type="text" id="facultyname" name="facultyname" class="form-control" placeholder="" required>
+     </div>
+
+     <!-- mode -->
+     <div class="mb-3">
+       <label for="coursetitle" class="form-label">Title of the Course <span class="text-danger">*</span></label>
+       <input type="text" id="coursetitle" name="coursetitle" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+      <label for="datefrom" class="form-label">Date (From) <span class="text-danger">*</span></label>
+      <input type="date" id="datefrom" name="datefrom" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="dateto" class="form-label">Date (To) <span class="text-danger">*</span></label>
+        <input type="date" id="dateto" name="dateto" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="mentorname" class="form-label">Name of the Mentor (if any) <span class="text-danger">*</span></label>
+        <input type="text" id="mentorname" name="mentorname" class="form-control" required>
+     </div>
+     
+     <!-- Attach Proof -->
+     <div class="mb-3">
+       <label for="attachproof1" class="form-label">Supporting Documents (Certificate) <span class="text-danger">*</span></label>
+       <input type="file" id="attachproof1" name="attachproof1" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="attachproof2" class="form-label">Attach XI file for Overall Department (S.No, Name of the student and Faculty, Title of the course, name of the mentor) <span class="text-danger">*</span></label>
+        <input type="file" id="attachproof2" name="attachproof2" class="form-control" required>
+     </div>
+
+     <!-- Submit Button -->
+     <div class="d-grid">
+       <button type="submit" class="btn btn-success">Submit</button>
+     </div>
+
+   </form>

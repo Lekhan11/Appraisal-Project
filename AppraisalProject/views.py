@@ -293,6 +293,134 @@ def submit_activity(request):
             'fromDate': request.POST.get("fromDate"),
             'toDate':request.POST.get("toDate",)
     }
+
+# Activite name 29
+    elif activityName == "29":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2"),
+        ]
+        details = {
+            'studentname': request.POST.get("studentname"),
+            'eventtype': request.POST.get("eventtype"),
+            'eventtitle': request.POST.get("eventtitle"),
+            'organizer': request.POST.get("organizer"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+            'mentorname': request.POST.get("mentorname"),
+        }
+
+# Activite name 30
+    elif activityName == "30":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2"),
+        ]
+        details = {
+            'studentname': request.POST.get("studentname"),
+            'eventtype': request.POST.get("eventtype"),
+            'companyname': request.POST.get("companyname"),
+            'designation': request.POST.get("designation"),
+            'salary': request.POST.get("salary"),
+        }
+
+# Activite name 31
+    elif activityName == "31":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2"),
+        ]
+        details = {
+            'studentname': request.POST.get("studentname"),
+            'designcontestname': request.POST.get("designcontestname"),
+            'organizer': request.POST.get("organizer"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+            'mentorname': request.POST.get("mentorname"),
+        }
+
+# Activite name 32
+    elif activityName == "32":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2"),
+        ]
+        details = {
+            'studentname': request.POST.get("studentname"),
+            'facultyname': request.POST.get("facultyname"),
+            'coursetitle': request.POST.get("coursetitle"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+            'mentorname': request.POST.get("mentorname"),
+        }
+
+# Activite name 33
+    elif activityName == "33":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2"),
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'eventdescription': request.POST.get("eventdescription"),
+            'organizer': request.POST.get("organizer"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+        }
+
+# Activite name 34
+    elif activityName == "34":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2"),
+        ]
+        details = {
+            'studentname': request.POST.get("studentname"),
+            'facultyname': request.POST.get("facultyname"),
+            'coursetitle': request.POST.get("coursetitle"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+            'mentorname': request.POST.get("mentorname"),
+        }
+
+# Activite name 35
+    elif activityName == "35":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2"),
+        ]
+        details = {
+            'staffname': request.POST.get("staffname"),
+            'subjectname': request.POST.get("subjectname"),
+            'year/sem': request.POST.get("year/sem"),
+            'methodadopted': request.POST.get("methodadopted"),
+            'youtubelink': request.POST.get("youtubelink"),
+            
+        }
+
+
+# Activite name 36
+    elif activityName == "36":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2"),
+            request.FILES.get("attachproof3")
+        ]
+        details = {
+            'guestname': request.POST.get("guestname"),
+            'eventtitle': request.POST.get("eventtitle"),
+            'date': request.POST.get("date"),
+            'participants': request.POST.get("participants"),
+            'programcoordinator1': request.POST.get("programcoordinator1"),
+            'programcoordinator2': request.POST.get("programcoordinator2"),
+            'resourceperson': request.POST.get("resourceperson"),
+            'designation': request.POST.get("designation"),
+            'phone': request.POST.get("phone"),
+            'mailid': request.POST.get("mailid"),
+
+        }
+
+
 #----------------------------------------------all activities above this line-------------------------------------------------------------
     proofs = [f for f in proofs if f]  # filter None values
     merged_file_field = None
