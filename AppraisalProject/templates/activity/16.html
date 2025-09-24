@@ -1,8 +1,13 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
-         {% csrf_token %}
+    {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+    
           
-        <label for="faculty" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
-        <input type="text" id="faculty" name="faculty" class="form-control" placeholder="Enter faculty name" required>
+        <label for="facultyname" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
+        <input type="text" id="facultyname" name="facultyname" class="form-control" placeholder="Enter faculty name" required>
 
         <label for="title" class="form-label">Title of the Patent <span class="text-danger">*</span></label>
         <input type="text" id="title" name="title" class="form-control" placeholder="Enter patent title" required>
@@ -10,8 +15,8 @@
         <label for="date" class="form-label">Date of Patent <span class="text-danger">*</span></label>
         <input type="date" id="date" name="date" class="form-control" required>
           
-        <label for="proof" class="form-label">Attach Proof (Applied / Granted) <span class="text-danger">*</span></label>
-        <input type="file" id="proof" name="proof" class="form-control" required>
+        <label for="attachproof" class="form-label">Attach Proof (Applied / Granted) <span class="text-danger">*</span></label>
+        <input type="file" id="attachproof" name="attachproof" class="form-control" required>
 
         <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>
 

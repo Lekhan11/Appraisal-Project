@@ -1,9 +1,13 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
     {% csrf_token %}
 
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+    
     <!-- Title -->
-    <label for="title" class="form-label">Title of the Event <span class="text-danger">*</span></label>
-    <input type="text" id="title" name="title" class="form-control" required>
+    <label for="eventtitle" class="form-label">Title of the Event <span class="text-danger">*</span></label>
+    <input type="text" id="eventtitle" name="eventtitle" class="form-control" required>
 
     <!-- Resource Person -->
     <label for="resourcePerson" class="form-label">Name of the Resource Person <span class="text-danger">*</span></label>
@@ -30,8 +34,8 @@
     <input type="text" id="coordinator2" name="coordinator2" class="form-control">
 
     <!-- Resource Profile -->
-    <label for="profile" class="form-label">Attach Resource Person Profile <span class="text-danger">*</span></label>
-    <input type="file" id="profile" name="profile" class="form-control" required>
+    <label for="attachproof1" class="form-label">Attach Resource Person Profile <span class="text-danger">*</span></label>
+    <input type="file" id="attachproof1" name="attachproof1" class="form-control" required>
 
     <!-- Event Date -->
     <label for="eventDate" class="form-label">Date of Event <span class="text-danger">*</span></label>
@@ -42,12 +46,12 @@
     <input type="number" id="participants" name="participants" class="form-control" min="1" required>
 
     <!-- PDF Upload -->
-    <label for="pdfAttachment" class="form-label">Attachment PDF (Permission letter, Circular, Brochure, Invitation, Geo tag Photos, Participant list, Summary, Feedback) <span class="text-danger">*</span></label>
-    <input type="file" id="pdfAttachment" name="pdfAttachment" accept=".pdf" class="form-control" required>
+    <label for="attachproof2" class="form-label">Attachment PDF (Permission letter, Circular, Brochure, Invitation, Geo tag Photos, Participant list, Summary, Feedback) <span class="text-danger">*</span></label>
+    <input type="file" id="attachproof2" name="attachproof2" class="form-control" required>
 
     <!-- Word Upload -->
-    <label for="wordAttachment" class="form-label">Attachment Word Copy in Color (Permission letter, Circular, Brochure, Invitation, Geo tag Photos, Participant list, Summary, Feedback) <span class="text-danger">*</span></label>
-    <input type="file" id="wordAttachment" name="wordAttachment" accept=".doc,.docx" class="form-control" required>
+    <label for="attachproof3" class="form-label">Attachment Word Copy in Color (Permission letter, Circular, Brochure, Invitation, Geo tag Photos, Participant list, Summary, Feedback) <span class="text-danger">*</span></label>
+    <input type="file" id="attachproof3" name="attachproof3" class="form-control" required>
 
     <!-- Submit -->
     <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>

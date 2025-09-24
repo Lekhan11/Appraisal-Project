@@ -112,17 +112,151 @@ def submit_activity(request):
             'fourthYear': request.POST.get("fourthYear"),
         }
 
+
+#consultancy
+    elif activityName == "17":
+        proofs = [
+        request.FILES.get("Approvalletter"),
+        request.FILE.get("Completionreport"),
+        request.FILE.get("Amountreceivedproof")
+    ]
+        details = {
+            'consultancyTitle': request.POST.get("consultancyTitle"),
+            'consultancyAmount': request.POST.get("consultancyAmount"),
+            'consultancyAgency': request.POST.get("consultancyAgency"),
+        }   
+
+#MoU
+    elif activityName == "18":
+        proofs = [
+            request.FILE.get("mouagreement"),
+            request.FILE.get("mousigningphotot")
+     ]
+        details = {
+            'company': request.POST.get("company"),
+            'date': request.POST.get("date"),
+            'duration': request.POST.get("duration"),
+            'coordinator1': request.POST.get("coordinator1"),
+            'coordinator2': request.POST.get("coordinator2"),
+            'activity': request.POST.get("activity"),
+            'eventDate': request.POST.get("eventDate"),
+            'participants': request.POST.get("participants"),
+
+
+        }
+
+#industrialguestlecture
+    elif activityName == "15":  
+        proofs = [
+            request.FILES.get("attachproof"),  # Word copy
+    ]
+        details = {
+           'facultyname': request.POST.get("facultyname"),
+           'title': request.POST.get("title"),
+           'Publisher': request.POST.get("Publisher"),
+           'issueNo': request.POST.get("issueNo"),
+           'issnNo': request.POST.get("issnNo"),
+           'monthYear': request.POST.get("monthYear"),
+           'websiteUrl': request.POST.get("websiteUrl"),
+    }
 #saturday
 #patent/copy rights
     elif activityName == "16":
         proofs = [
-        request.FILES.get("patentProof"),
+        request.FILES.get("attachproof"),
     ]
         details = {
-            'patentTitle': request.POST.get("patentTitle"),
-            'patentNumber': request.POST.get("patentNumber"),
-            'patentStatus': request.POST.get("patentStatus"),
+            'facultyname': request.POST.get("facultyname"),
+            'title': request.POST.get("title"),
+            'date': request.POST.get("date"),
         }
+
+
+#consultancy
+    elif activityName == "17":
+        proofs = [
+        request.FILES.get("attachproof1"),
+        request.FILES.get("attachproof2"),
+        request.FILES.get("attachproof3")
+    ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'title': request.POST.get("title"),
+            'agency': request.POST.get("agency"),
+            'fromDate': request.POST.get("fromDate"),
+            'duration': request.POST.get("duration"),
+            'amount': request.POST.get("amount"),
+
+        }   
+
+#MoU
+    elif activityName == "18":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2")
+     ]
+        details = {
+            'companyname': request.POST.get("companyname"),
+            'date': request.POST.get("date"),
+            'duration': request.POST.get("duration"),
+            'coordinator1': request.POST.get("coordinator1"),
+            'coordinator2': request.POST.get("coordinator2"),
+            'activityname': request.POST.get("activityname"),
+            'eventDate': request.POST.get("eventDate"),
+            'participants': request.POST.get("participants"),
+
+
+        }
+
+#industrialguestlecture
+    elif activityName == "19":  
+        proofs = [
+            request.FILES.get("attachproof1"),        # Resource Person Profile
+            request.FILES.get("attachproof2"),  # PDF with all docs
+            request.FILES.get("attachproof3")  # Word copy
+    ]
+        details = {
+           'eventtitle': request.POST.get("eventtitle"),
+           'resourcePerson': request.POST.get("resourcePerson"),
+           'designation': request.POST.get("designation"),
+           'phone': request.POST.get("phone"),
+           'email': request.POST.get("email"),
+           'coordinator1': request.POST.get("coordinator1"),
+           'coordinator2': request.POST.get("coordinator2"),
+           'eventDate': request.POST.get("eventDate"),
+           'participants': request.POST.get("participants"),
+    }
+        
+#facultyintership
+# Activite name 20
+    elif activityName == "20":   # give a unique ID for this activity
+        proofs = [
+            request.FILES.get("attachproof1"),       # Geo-tagged Photo
+            request.FILES.get("attachproof2")  # Certificate
+    ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'industryname': request.POST.get("industryname"),
+            'fromDate': request.POST.get("datefrom"),
+            'toDate': request.POST.get("dateto"),
+    }
+      
+# Activite name 21
+    elif activityName == "21":
+        proofs = [
+            request.FILES.get("attachproof1"),
+            request.FILES.get("attachproof2"),
+        ]
+        details = {
+            'facultyname': request.POST.get("facultyname"),
+            'eventtype': request.POST.get("eventtype"),
+            'eventtitle': request.POST.get("eventtitle"),
+            'organizer': request.POST.get("organizer"),
+            'datefrom': request.POST.get("datefrom"),
+            'dateto': request.POST.get("dateto"),
+
+        }
+
 
 # Activite name 22
     elif activityName == "22":
@@ -214,86 +348,8 @@ def submit_activity(request):
             
         }                                        
 
-#consultancy
-    elif activityName == "17":
-        proofs = [
-        request.FILES.get("Approvalletter"),
-        request.FILE.get("Completionreport"),
-        request.FILE.get("Amountreceivedproof")
-    ]
-        details = {
-            'consultancyTitle': request.POST.get("consultancyTitle"),
-            'consultancyAmount': request.POST.get("consultancyAmount"),
-            'consultancyAgency': request.POST.get("consultancyAgency"),
-        }   
-
-#MoU
-    elif activityName == "18":
-        proofs = [
-            request.FILE.get("mouagreement"),
-            request.FILE.get("mousigningphotot")
-     ]
-        details = {
-            'company': request.POST.get("company"),
-            'date': request.POST.get("date"),
-            'duration': request.POST.get("duration"),
-            'coordinator1': request.POST.get("coordinator1"),
-            'coordinator2': request.POST.get("coordinator2"),
-            'activity': request.POST.get("activity"),
-            'eventDate': request.POST.get("eventDate"),
-            'participants': request.POST.get("participants"),
-
-
-        }
-
-#industrialguestlecture
-    elif activityName == "19":  
-        proofs = [
-            request.FILES.get("profile"),        # Resource Person Profile
-            request.FILES.get("pdfAttachment"),  # PDF with all docs
-            request.FILES.get("wordAttachment")  # Word copy
-    ]
-        details = {
-           'description': request.POST.get("description"),
-           'title': request.POST.get("title"),
-           'resourcePerson': request.POST.get("resourcePerson"),
-           'designation': request.POST.get("designation"),
-           'phone': request.POST.get("phone"),
-           'email': request.POST.get("email"),
-           'coordinator1': request.POST.get("coordinator1"),
-           'coordinator2': request.POST.get("coordinator2"),
-           'eventDate': request.POST.get("eventDate"),
-           'participants': request.POST.get("participants"),
-    }
          
-#facultyintership
-    elif activityName == "20":   # give a unique ID for this activity
-        proofs = [
-            request.FILES.get("photo"),       # Geo-tagged Photo
-            request.FILES.get("certificate")  # Certificate
-    ]
-        details = {
-            'faculty': request.POST.get("faculty"),
-            'industry': request.POST.get("industry"),
-            'fromDate': request.POST.get("fromDate"),
-            'toDate': request.POST.get("toDate"),
-    }
         
-#facultyawards
-    elif activityName == "21": 
-        proofs = [
-            request.FILES.get("xlSheet"),       
-            request.FILES.getlist("certificates") 
-        ]
-        details = {
-            'faculty': request.POST.get("faculty"),
-            'eventType': request.POST.get("eventType"),
-            'title': request.POST.get("title"),
-            'organizer': request.POST.get("organizer"),
-            'fromDate': request.POST.get("fromDate"),
-            'toDate':request.POST.get("toDate",)
-    }
-
 # Activite name 29
     elif activityName == "29":
         proofs = [

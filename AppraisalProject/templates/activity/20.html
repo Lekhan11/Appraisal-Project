@@ -1,29 +1,46 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
     {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
     
-    <label for="faculty" class="form-label">Name of Faculty <span class="text-danger">*</span></label>
-    <input type="text" id="faculty" name="faculty" class="form-control" required>
+     <!-- Name of Faculty -->
+     <div class="mb-3">
+       <label for="facultyname" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
+       <input type="text" id="facultyname" name="facultyname" class="form-control" placeholder="" required>
+     </div>
 
-    <!-- Industry Name -->
-    <label for="industry" class="form-label">Name of the Industry <span class="text-danger">*</span></label>
-    <input type="text" id="industry" name="industry" class="form-control" required>
+     <!-- Title of Patent -->
+     <div class="mb-3">
+       <label for="industryname" class="form-label">Name of the Industry <span class="text-danger">*</span></label>
+       <input type="text" id="industryname" name="industryname" class="form-control" placeholder="" required>
+     </div>
 
-    <!-- From Date -->
-    <label for="fromDate" class="form-label">From Date <span class="text-danger">*</span></label>
-    <input type="date" id="fromDate" name="fromDate" class="form-control" required>
+     <div class="mb-3">
+      <label for="datefrom" class="form-label">From Date <span class="text-danger">*</span></label>
+      <input type="date" id="datefrom" name="datefrom" class="form-control" required>
+     </div>
 
-    <!-- To Date -->
-    <label for="toDate" class="form-label">To Date <span class="text-danger">*</span></label>
-    <input type="date" id="toDate" name="toDate" class="form-control" required>
+     <div class="mb-3">
+      <label for="dateto" class="form-label">To Date <span class="text-danger">*</span></label>
+      <input type="date" id="dateto" name="dateto" class="form-control" required>
+     </div>
 
-    <!-- Photo Upload -->
-    <label for="photo" class="form-label">Photo (Geo tag) <span class="text-danger">*</span></label>
-    <input type="file" id="photo" name="photo" class="form-control" accept="image/*" required>
+     <!-- Attach Proof -->
+     <div class="mb-3">
+       <label for="attachproof1" class="form-label">Photo (Geo tag) <span class="text-danger">*</span></label>
+       <input type="file" id="attachproof1" name="attachproof1" class="form-control" required>
+     </div>
 
-    <!-- Certificate Upload -->
-    <label for="certificate" class="form-label">Certificate <span class="text-danger">*</span></label>
-    <input type="file" id="certificate" name="certificate" class="form-control" accept=".pdf,.jpg,.jpeg,.png" required>
+     <div class="mb-3">
+       <label for="attachproof2" class="form-label">Certificate <span class="text-danger">*</span></label>
+       <input type="file" id="attachproof2" name="attachproof2" class="form-control" required>
+     </div>
 
-    <!-- Submit -->
-    <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>
-</form>
+     <!-- Submit Button -->
+     <div class="d-grid">
+       <button type="submit" class="btn btn-success">Submit</button>
+     </div>
+
+   </form>
