@@ -1,0 +1,81 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
+     <!-- Name of Faculty -->
+     <div class="mb-3">
+       <label for="guestname" class="form-label">Name of the Guest <span class="text-danger">*</span></label>
+       <input type="text" id="guestname" name="guestname" class="form-control" placeholder="" required>
+     </div>
+
+     <!-- Title of Patent -->
+     <div class="mb-3">
+       <label for="eventtitle" class="form-label">Title of the Event <span class="text-danger">*</span></label>
+       <input type="text" id="eventtitle" name="eventtitle" class="form-control" placeholder="" required>
+     </div>
+
+     <div class="mb-3">
+      <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
+      <input type="date" id="date" name="date" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="participants" class="form-label">Number of participants <span class="text-danger">*</span></label>
+        <input type="text" id="participants" name="participants" class="form-control" required>
+     </div>
+     
+     <!-- Attach Proof -->
+     <div class="mb-3">
+       <label for="programcoordinator1" class="form-label">Program Coordinator - 1 <span class="text-danger">*</span></label>
+       <input type="text" id="programcoordinator1" name="programcoordinator1" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="programcoordinator2" class="form-label">Program Coordinator - 2 (if any) <span class="text-danger">*</span></label>
+        <input type="text" id="programcoordinator2" name="programcoordinator2" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="resourceperson" class="form-label">Name of the Resource Person <span class="text-danger">*</span></label>
+        <input type="text" id="resourceperson" name="resourceperson" class="form-control" required>
+     </div>
+
+    <div class="mb-3">
+        <label for="designation" class="form-label">Designation and Name of the Organization <span class="text-danger">*</span></label>
+        <input type="text" id="designation" name="designation" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+        <input type="text" id="phone" name="phone" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="mailid" class="form-label">Mail ID <span class="text-danger">*</span></label>
+        <input type="text" id="mailid" name="mailid" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="attachproof1" class="form-label">Attach Resource Person Profile <span class="text-danger">*</span></label>
+        <input type="file" id="attachproof1" name="attachproof1" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="attachproof2" class="form-label">Attach Word documents Proof in color (permission letter, circular, brochure, invitation, Photo, Participant list, summary, feedback) <span class="text-danger">*</span></label>
+        <input type="file" id="attachproof2" name="attachproof2" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="attachproof3" class="form-label">Attach PDF documents Proof (permission letter, circular, brochure, invitation, Photo, Participant list, summary, feedback) <span class="text-danger">*</span></label>
+        <input type="file" id="attachproof3" name="attachproof3" class="form-control" required>
+     </div>
+     <!-- Submit Button -->
+
+     <div class="d-grid">
+       <button type="submit" class="btn btn-success">Submit</button>
+     </div>
+
+   </form>

@@ -1,0 +1,57 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
+     <!-- Name of Faculty -->
+     <div class="mb-3">
+       <label for="studentname" class="form-label">Name of the Students <span class="text-danger">*</span></label>
+       <input type="text" id="studentname" name="studentname" class="form-control" placeholder="" required>
+     </div>
+
+     <!-- Title of Patent -->
+     <div class="mb-3">
+       <label for="designcontestname" class="form-label">Name of the Design Contest <span class="text-danger">*</span></label>
+       <input type="text" id="designcontestname" name="designcontestname" class="form-control" placeholder="" required>
+     </div>
+
+     <!-- mode -->
+     <div class="mb-3">
+       <label for="organizer" class="form-label">Organizer details <span class="text-danger">*</span></label>
+       <input type="text" id="organizer" name="organizer" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+      <label for="datefrom" class="form-label">Date (From) <span class="text-danger">*</span></label>
+      <input type="date" id="datefrom" name="datefrom" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="dateto" class="form-label">Date (To) <span class="text-danger">*</span></label>
+        <input type="date" id="dateto" name="dateto" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="mentorname" class="form-label">Name of the Mentor <span class="text-danger">*</span></label>
+        <input type="text" id="mentorname" name="mentorname" class="form-control" required>
+     </div>
+     
+     <!-- Attach Proof -->
+     <div class="mb-3">
+       <label for="attachproof1" class="form-label">Attach XL sheet (S.No,Student name, Title, Date, Place, Prize) <span class="text-danger">*</span></label>
+       <input type="file" id="attachproof1" name="attachproof1" class="form-control" required>
+     </div>
+
+     <div class="mb-3">
+        <label for="attachproof2" class="form-label">Attach Certificate in PDF format in XL sheet order <span class="text-danger">*</span></label>
+        <input type="file" id="attachproof2" name="attachproof2" class="form-control" required>
+     </div>
+
+     <!-- Submit Button -->
+     <div class="d-grid">
+       <button type="submit" class="btn btn-success">Submit</button>
+     </div>
+
+   </form>

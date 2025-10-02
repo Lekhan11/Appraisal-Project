@@ -1,0 +1,41 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+    
+    <!-- Title -->
+    <label for="facultyname" class="form-label">Name The Faculty <span class="text-danger">*</span></label>
+    <input type="text" id="facultyname" name="facultyname" class="form-control" required>
+
+    <!-- Resource Person -->
+    <label for="title" class="form-label">Title of the Book / Book chapter <span class="text-danger">*</span></label>
+    <input type="text" id="title" name="title" class="form-control" required>
+
+    <!-- Designation & Organization -->
+    <label for="Publisher" class="form-label">Name of the Publisher <span class="text-danger">*</span></label>
+    <input type="text" id="Publisher" name="Publisher" class="form-control" required>
+
+    <!-- Phone -->
+    <label for="issueNo" class="form-label">Issue No <span class="text-danger">*</span></label>
+    <input type="text" id="issueNo" name="issueNo" class="form-control" required>
+
+    <!-- Email -->
+    <label for="issnNo" class="form-label">ISSN No <span class="text-danger">*</span></label>
+    <input type="email" id="issnNo" name="issnNo" class="form-control" required>
+
+    <!-- Month and Year -->
+    <label for="monthYear" class="form-label">Month and Year of Publication <span class="text-danger">*</span></label>
+    <input type="text" id="monthYear" name="monthYear" class="form-control" required>
+
+    <!-- Website URL -->
+    <label for="websiteUrl" class="form-label">Website URL link of the Book </label>
+    <input type="text" id="websiteUrl" name="websiteUrl" class="form-control">
+
+    <label for="attachproof" class="form-label">Attach Proof of Publication (e.g., PDF, DOCX) <span class="text-danger">*</span></label>
+    <input type="file" id="attachproof" name="attachproof" class="form-control" required>
+
+    <!-- Submit -->
+    <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>
+</form>
