@@ -82,6 +82,7 @@ def submit_activity(request):
     activityRelation = Activities.objects.get(id=activityName)
     departmentName=Department.objects.get(departmentName=department)
     proofs = []   # always define outside
+
 #IAE DETAILS
     if activityName == "1":
         proofs = [
@@ -484,7 +485,7 @@ def submit_activity(request):
         buf = io.BytesIO()
         merge_uploads_to_pdf(proofs, buf)   # 👈 function implement pannano
         buf.seek(0)
-        merged_file_field = ContentFile(buf.read(), name=f"IAE_{request.user.id}.pdf")
+        merged_file_field = ContentFile(buf.read(), name=f"{activityName}_{request.user.id}.pdf")
         # save activity
     try:
         ActivitySubmission.objects.create(
