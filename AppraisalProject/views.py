@@ -230,8 +230,8 @@ def submit_activity(request):
 #MoU
     elif activityName == "18":
         proofs = [
-            request.FILE.get("mouagreement"),
-            request.FILE.get("mousigningphotot")
+            request.FILES.get("mouProof"),
+            request.FILES.get("mouPhoto")
      ]
         details = {
             'company': request.POST.get("company"),

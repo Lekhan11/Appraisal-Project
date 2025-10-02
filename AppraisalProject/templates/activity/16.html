@@ -1,6 +1,11 @@
 <form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
          {% csrf_token %}
-          
+         
+         <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
+
         <label for="faculty" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
         <input type="text" id="faculty" name="faculty" class="form-control" placeholder="Enter faculty name" required>
 

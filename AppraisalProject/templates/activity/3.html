@@ -1,4 +1,9 @@
 <form action="{% url 'submit_activity' %}" >
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+
     <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
     <input type="text" id="title" name="title" class="form-control" required>
 
