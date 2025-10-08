@@ -1,0 +1,90 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+    
+    <!-- Name of Faculty -->
+    <div class="mb-3">
+        <label for="facultyname" class="form-label">Name of the Faculty <span class="text-danger">*</span></label>
+        <input type="text" id="facultyname" name="facultyname" class="form-control" required>
+    </div>
+
+    <!-- Type of the Event -->
+    <div class="mb-3">
+        <label for="eventtype" class="form-label">Type of the Event <span class="text-danger">*</span></label>
+        
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="eventtype" id="workshop" value="Workshop" required>
+            <label class="form-check-label" for="workshop">Workshop</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="eventtype" id="seminar" value="Seminar">
+            <label class="form-check-label" for="seminar">Seminar</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="eventtype" id="fdp" value="FDP">
+            <label class="form-check-label" for="fdp">FDP</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="eventtype" id="conference" value="Conference">
+            <label class="form-check-label" for="conference">Conference</label>
+        </div>
+    </div>
+
+    <!-- Mode of Participation -->
+    <div class="mb-3">
+        <label for="mode" class="form-label">Mode of Participation <span class="text-danger">*</span></label>
+        
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="participation_mode" id="online" value="Online" required>
+            <label class="form-check-label" for="online">Online (IIT & NIT Only)</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="participation_mode" id="offline" value="Offline">
+            <label class="form-check-label" for="offline">Offline (Top 200 NIRF Colleges Only)</label>
+        </div>
+    </div>
+
+    <!-- Other Inputs -->
+    <div class="mb-3">
+        <label for="eventtitle" class="form-label">Title of the Event <span class="text-danger">*</span></label>
+        <input type="text" id="eventtitle" name="eventtitle" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="datefrom" class="form-label">Date (From) <span class="text-danger">*</span></label>
+        <input type="date" id="datefrom" name="datefrom" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="dateto" class="form-label">Date (To) <span class="text-danger">*</span></label>
+        <input type="date" id="dateto" name="dateto" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="organizername" class="form-label">Name of the Organizer Institute <span class="text-danger">*</span></label>
+        <input type="text" id="organizername" name="organizername" class="form-control" required>
+    </div>
+
+    <!-- Attach Proof -->
+    <div class="mb-3">
+        <label for="attachproof1" class="form-label">Attach Proof (Certificate) <span class="text-danger">*</span></label>
+        <input type="file" id="attachproof1" name="attachproof1" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="attachproof2" class="form-label">Upload Permission Letter if Online Mode / Upload OD Letter if Offline Mode <span class="text-danger">*</span></label>
+        <input type="file" id="attachproof2" name="attachproof2" class="form-control" required>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="d-grid">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</form>

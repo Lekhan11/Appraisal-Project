@@ -1,0 +1,51 @@
+<form method="post" action="{% url 'submit_activity' %}" enctype="multipart/form-data" class="d-flex flex-column">
+    {% csrf_token %}
+
+    <input type="hidden" name="department" value="{{ department }}">
+    <input type="hidden" name="month" value="{{ month }}">
+    <input type="hidden" name="activityName" value="{{ activityName }}">
+    
+    <label for="guestname" class="form-label">Name the Guest <span class="text-danger">*</span></label>
+    <input type="text" id="guestname" name="guestname" class="form-control" required>
+
+    <label for="eventtitle" class="form-label">Title of the Event <span class="text-danger">*</span></label>
+    <input type="text" id="eventtitle" name="eventtitle" class="form-control" required>
+
+    <!-- Phone -->
+    <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
+    <input type="date" id="date" name="date" class="form-control" required>
+
+    <!-- Website URL -->
+    <label for="participants" class="form-label">Number of Participants </label>
+    <input type="text" id="participants" name="participants" class="form-control">
+
+    <label for="Coordinator1" class="form-label">Program Coordinator - 1 </label>
+    <input type="text" id="Coordinator1" name="Coordinator1" class="form-control">
+
+    <label for="Coordinator2" class="form-label">Program Coordinator -2 (if any) </label>
+    <input type="text" id="Coordinator2" name="Coordinator2" class="form-control">
+
+    <label for="resourcename" class="form-label">Name of the Resource Person </label>
+    <input type="text" id="resourcename" name="resourcename" class="form-control">
+    
+    <label for="organizationname" class="form-label">Designation and Name of the Organization </label>
+    <input type="text" id="organizationname" name="organizationname" class="form-control">
+
+    <label for="phonenumber" class="form-label">Phone Number </label>
+    <input type="text" id="phonenumber" name="phonenumber" class="form-control">
+
+    <label for="email" class="form-label">Mail ID </label>
+    <input type="mail" id="email" name="email" class="form-control">
+<!-- Website URL -->
+    <label for="attachproof1" class="form-label">Attach Resource Person Profile </label>
+    <input type="file" id="attachproof1" name="attachproof1" class="form-control">
+    
+    <label for="attachproof2" class="form-label">Attach Word documents Proof in color (Permission letter, Circular, Brochure, Invitation, Photo, Participant list, Summary, Feedback) </label>
+    <input type="file" id="attachproof2" name="attachproof2" class="form-control">
+
+    <label for="attachproof3" class="form-label">Attach PDF documents Proof (Permission letter, Circular, Brochure, Invitation, Photo, Participant list, Summary, Feedback) <span class="text-danger">*</span></label>
+    <input type="file" id="attachproof3" name="attachproof3" class="form-control" required>
+
+    <!-- Submit -->
+    <button type="submit" class="btn btn-primary w-50 m-auto d-block mt-3">Submit</button>
+</form>

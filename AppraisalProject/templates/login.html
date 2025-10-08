@@ -1,35 +1,43 @@
-{% extends 'base.html' %}
-{% block title %}Login{% endblock %}
-
+{% extends 'base.html' %} {% block title %}Login{% endblock %} 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6 col-12">
+<div class="d-flex flex-row justify-content-center align-items-center vh-100">
+  <div class="col-lg-6 col-12 "style="max-width: 400px;height: auto;">
         {% if messages %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+        ></button>
         </div>
-    {% endif %}
+        {% endif %}
         <div class="card shadow">
-            <div class="card-header bg-primary text-white">Login</div>
-            <div class="card-body">
-                <form method="POST">
-                    {% csrf_token %}
+        <div class="card-header bg-primary text-white">Login</div>
+        <div class="card-body">
+            <form method="POST">
+            {% csrf_token %}
 
-                    <div class="mb-3">
-                        <label class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
-                </form>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" required />
             </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input
+                type="password"
+                name="password"
+                class="form-control"
+                required
+                />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
         </div>
-    </div>
+        </div>
+  </div>
 </div>
 {% endblock %}
