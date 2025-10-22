@@ -15,10 +15,12 @@
 <body class="bg-light">
 
 <!-- Page Content -->
+
+{% if debug %}
+  <script src="{% static 'django_browser_reload/reload.js' %}"></script>
+{% endif %}
 <div class="container-fluid mt-0 p-0 mx-0 ">
     {% block content %}{% endblock %}
 </div>
-
-
 </body>
 </html>

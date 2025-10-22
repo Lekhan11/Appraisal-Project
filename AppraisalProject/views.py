@@ -1,4 +1,5 @@
 import calendar
+from urllib import request
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
@@ -9,6 +10,7 @@ import io
 from django.core.files.base import ContentFile
 from .utils import merge_uploads_to_pdf
 from datetime import datetime
+
 
 
 def Login(request):
@@ -26,7 +28,7 @@ def Login(request):
     return render(request, 'login.html')
 
 @login_required(login_url='login')
-def Home(request):
+def Home(request, content=None):
     departments = Department.objects.all()
     activities = Activities.objects.all()
     acadYear = f"Jan {datetime.now().year} - Dec {datetime.now().year}"
@@ -35,6 +37,7 @@ def Home(request):
     month = request.POST.get('month')
     activityName = None
     submitted = False
+    
 
     if request.method == 'POST':
         activityName = request.POST.get('activityName')
@@ -49,9 +52,24 @@ def Home(request):
 
     elif request.user.role == 'hod':
         totalFaculty = CreateUser.objects.filter(role='faculty', department=request.user.department).count()
-        return render(request, 'hod/home.html', {'user': request.user, 'totalFaculty': totalFaculty ,'acadYear': acadYear})
+        activities_submitted_this_month = ActivitySubmission.objects.filter(user__department=request.user.department, created_at__month=datetime.now().month).count()
+        activities_submitted_this_year = ActivitySubmission.objects.filter(user__department=request.user.department, created_at__year=datetime.now().year).count()
+        try:
+            #activities_submitted_today = None
+            activities_submitted_today = ActivitySubmission.objects.filter(user__department=request.user.department, created_at__date=datetime.now().date())
+        except ActivitySubmission.DoesNotExist:
+            activities_submitted_today = None
+        return render(request, 'hod/home.html',
+                      {'user': request.user,
+                       'totalFaculty': totalFaculty,
+                       'activities_submitted_this_month': activities_submitted_this_month,
+                       'activities_submitted_this_year': activities_submitted_this_year,
+                       'activities_submitted_today': activities_submitted_today,
+                       'acadYear': acadYear})
 
     elif request.user.role == 'faculty':
+        if content=='dashboard':
+            monthly_submissions = ActivitySubmission.objects.filter(user=request.user, created_at__month=datetime.now().month)
         return render(
             request,
             'faculty/home.html',
@@ -65,6 +83,10 @@ def Home(request):
                 'months': months,
                 'submitted': submitted,
                 'activityName': activityName,
+                'content': content,
+                'monthly_submissions': monthly_submissions if content=='dashboard' else None,
+                
+                
             },
         )
     else:
@@ -640,3 +662,9 @@ def submit_activity(request):
         messages.error(request, 'There was an error submitting your activity. Please try again.')
         print(e)
         return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
+    
+    
+def dashboard(request):
+    current_user = CreateUser.objects.get(username=request.user)
+    print(current_user.reports_to.id)
+    return render(request,"faculty/dashboard.html",{'user':current_user})

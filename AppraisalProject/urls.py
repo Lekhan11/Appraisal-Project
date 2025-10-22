@@ -1,12 +1,17 @@
 from django.contrib import admin
 from django.urls import path
 from .views import *
+from django.urls import include
 
 
 
 
 urlpatterns = [
-    path('',Login,name='login'),
+    path('', Login, name='login'),
+    path('home/<str:content>/', Home, name='home'),
     path('home/', Home, name='home'),
-    path('submit-activity/', submit_activity, name='submit_activity')
+    path('submit-activity/', submit_activity, name='submit_activity'),
+    path('dashboard/', Home, {'content': 'dashboard'}, name='dashboard'),
+    path("__reload__/", include("django_browser_reload.urls")),
+    
 ]

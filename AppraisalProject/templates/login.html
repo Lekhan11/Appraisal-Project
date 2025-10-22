@@ -3,7 +3,7 @@
 <div class="d-flex flex-row justify-content-center align-items-center vh-100">
   <div class="col-lg-6 col-12 "style="max-width: 400px;height: auto;">
         {% if messages %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible  fade show  align-item-center" role="alert" >
         {% for message in messages %}
         <p>{{ message }}</p>
         {% endfor %}
@@ -15,18 +15,18 @@
         ></button>
         </div>
         {% endif %}
-        <div class="card shadow">
-        <div class="card-header bg-primary text-white">Login</div>
+        <div class="card shadow-lg">
+        <div class="card-header bg-success text-white text-center fw-bolder">Login Page</div>
         <div class="card-body">
             <form method="POST">
             {% csrf_token %}
 
             <div class="mb-3">
-                <label class="form-label">Username</label>
+                <label class="form-label text-dark fs-5">Username</label>
                 <input type="text" name="username" class="form-control" required />
             </div>
             <div class="mb-3">
-                <label class="form-label">Password</label>
+                <label class="form-label text-dark fs-5">Password</label>
                 <input
                 type="password"
                 name="password"
@@ -34,7 +34,7 @@
                 required
                 />
             </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
+            <button type="submit" class="btn btn-primary w-100 fw-bold">Login</button>
             </form>
         </div>
         </div>

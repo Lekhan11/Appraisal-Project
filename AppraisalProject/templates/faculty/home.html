@@ -15,7 +15,7 @@
     <div class="col-3 col-md-2 bg-secondary text-white p-3 vh-100">
         <h5 class="mb-3">Menu</h5> 
         <ul class="list-unstyled">
-            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Dashboard</a></li>
+            <li class="mb-2"><a href={% url 'dashboard' %} class="text-white text-decoration-none">Dashboard</a></li>
             <li class="mb-2"><a href="#" class="text-white text-decoration-none">Faculty Data</a></li>
             <li class="mb-2"><a href="#" class="text-white text-decoration-none">Reports</a></li>
             <li class="mb-2"><a href="#" class="text-white text-decoration-none">Settings</a></li>
@@ -34,11 +34,12 @@
         </div>
 
         <!-- Dashboard Content -->
+            {% if content == None %}
         <div class="content bg-white p-4 rounded shadow-sm">
             <h4 class="mb-3">Hello {{ user.username }} 👋</h4>
             <p>This is your faculty appraisal dashboard. Use the menu to navigate.</p>
             <div class="d-flex justify-content-center ">
-                <div class="card border-dark w-75">
+                <div class="card  border-dark w-75" style="max-width: fit-content;">
                     <div class="card-body">
                         {% if not submitted and not activitySubmitted %}
                             <form action="" method="post" class="d-flex flex-column">
@@ -86,6 +87,9 @@
                 </div>
             </div>
         </div>
+            {% elif content == 'dashboard' %}
+               {% include "faculty/dashboard.html" %}
+            {% endif %}
     </div>
 </div>
 {% endblock %}
