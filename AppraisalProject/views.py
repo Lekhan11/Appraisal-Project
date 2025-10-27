@@ -1,15 +1,17 @@
 import calendar
 from urllib import request
+from django.http import FileResponse, Http404
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
-import io
+import io,os
 from django.core.files.base import ContentFile
 from .utils import merge_uploads_to_pdf
 from datetime import datetime
+from django.conf import settings
 
 
 
@@ -56,7 +58,8 @@ def Home(request, content=None):
         activities_submitted_this_year = ActivitySubmission.objects.filter(user__department=request.user.department, created_at__year=datetime.now().year).count()
         try:
             #activities_submitted_today = None
-            activities_submitted_today = ActivitySubmission.objects.filter(user__department=request.user.department, created_at__date=datetime.now().date())
+            activities_submitted_today = ActivitySubmission.objects.filter(user__department=request.user.department, created_at__month=datetime.now().month)
+            print(activities_submitted_today)        
         except ActivitySubmission.DoesNotExist:
             activities_submitted_today = None
         return render(request, 'hod/home.html',
@@ -113,11 +116,11 @@ def submit_activity(request):
     request.FILES.get("fourthYearProof"),
 ]
         details = {
-            'firstYearPercent': request.POST.get("firstYear"),
-            'secondYearPercent': request.POST.get("secondYear"),
-            'thirdYearPercent': request.POST.get("thirdYear"),
-            'fourthYearPercent': request.POST.get("fourthYear"),
-            'iaeDetail': request.POST.get("iaeDetail"),
+            'first_Year_Percent': request.POST.get("firstYear"),
+            'second_Year_Percent': request.POST.get("secondYear"),
+            'third_Year_Percent': request.POST.get("thirdYear"),
+            'fourth_Year_Percent': request.POST.get("fourthYear"),
+            'iae_Detail': request.POST.get("iaeDetail"),
         }
 #camu
     elif activityName == "2":
@@ -128,10 +131,10 @@ def submit_activity(request):
         request.FILES.get("fourthYearProof"),
     ]
         details = {
-            'firstYear': request.POST.get("firstYear"),
-            'secondYear': request.POST.get("secondYear"),
-            'thirdYear': request.POST.get("thirdYear"),
-            'fourthYear': request.POST.get("fourthYear"),
+            'first_Year': request.POST.get("firstYear"),
+            'second_Year': request.POST.get("secondYear"),
+            'third_Year': request.POST.get("thirdYear"),
+            'fourth_Year': request.POST.get("fourthYear"),
         }
 
 # Activite name 5
@@ -142,15 +145,15 @@ def submit_activity(request):
             request.FILES.get("attachproof3")
         ]
         details = {
-            'guestname': request.POST.get("guestname"),
-            'eventtitle': request.POST.get("eventtitle"),
+            'guest_name': request.POST.get("guestname"),
+            'event_title': request.POST.get("eventtitle"),
             'date': request.POST.get("date"),
             'participants': request.POST.get("participants"),
-            'Coordinator1': request.POST.get("Coordinator1"),
-            'Coordinator2': request.POST.get("Coordinator2"),
-            'resourcename': request.POST.get("resourcename"),
-            'organizationname': request.POST.get("organizationname"),
-            'phonenumber': request.POST.get("phonenumber"),
+            'Coordinator_1': request.POST.get("Coordinator1"),
+            'Coordinator_2': request.POST.get("Coordinator2"),
+            'resource_name': request.POST.get("resourcename"),
+            'organization_name': request.POST.get("organizationname"),
+            'phone_number': request.POST.get("phonenumber"),
             'email': request.POST.get("email"),
         }
 
@@ -161,13 +164,13 @@ def submit_activity(request):
             request.FILES.get("attachproof2"),
         ]
         details = {
-            'facultyname': request.POST.get("facultyname"),
-            'eventtype': request.POST.get("eventtype"),
+            'faculty_name': request.POST.get("facultyname"),
+            'event_type': request.POST.get("eventtype"),
             'mode': request.POST.get("mode"),
-            'eventtitle': request.POST.get("eventitle"),
-            'fromdate': request.POST.get("fromdate"),
-            'todate': request.POST.get("todate"),
-            'organizername': request.POST.get("organizername"),
+            'event_title': request.POST.get("eventitle"),
+            'from_date': request.POST.get("fromdate"),
+            'to_date': request.POST.get("todate"),
+            'organizer_name': request.POST.get("organizername"),
         }
 
 # Activite name 7
@@ -179,14 +182,14 @@ def submit_activity(request):
         ]
         details = {
             'title': request.POST.get("title"),
-            'fromdate': request.POST.get("fromdate"),
-            'todate': request.POST.get("todate"),
+            'from_date': request.POST.get("fromdate"),
+            'to_date': request.POST.get("todate"),
             'participants': request.POST.get("participants"),
-            'Coordinator1': request.POST.get("Coordinator1"),
-            'Coordinator2': request.POST.get("Coordinator2"),
-            'resourcename': request.POST.get("resourcename"),
-            'organizationname': request.POST.get("organizationname"),
-            'phonenumber': request.POST.get("phonenumber"),
+            'Coordinator_1': request.POST.get("Coordinator1"),
+            'Coordinator_2': request.POST.get("Coordinator2"),
+            'resource_name': request.POST.get("resourcename"),
+            'organization_name': request.POST.get("organizationname"),
+            'phone_number': request.POST.get("phonenumber"),
             'email': request.POST.get("email"),
         }
 
@@ -198,16 +201,16 @@ def submit_activity(request):
             request.FILES.get("attachproof3")
         ]
         details = {
-            'clubname': request.POST.get("clubname"),
+            'club_name': request.POST.get("clubname"),
             'title': request.POST.get("title"),
-            'fromdate': request.POST.get("fromdate"),
-            'todate': request.POST.get("todate"),
+            'from_date': request.POST.get("fromdate"),
+            'to_date': request.POST.get("todate"),
             'participants': request.POST.get("participants"),
-            'Coordinator1': request.POST.get("Coordinator1"),
-            'Coordinator2': request.POST.get("Coordinator2"),
-            'resourcename': request.POST.get("resourcename"),
-            'organizationname': request.POST.get("organizationname"),
-            'phonenumber': request.POST.get("phonenumber"),
+            'Coordinator_1': request.POST.get("Coordinator1"),
+            'Coordinator_2': request.POST.get("Coordinator2"),
+            'resource_name': request.POST.get("resourcename"),
+            'organization_name': request.POST.get("organizationname"),
+            'phone_number': request.POST.get("phonenumber"),
             'email': request.POST.get("email"),
         }
 
@@ -218,12 +221,12 @@ def submit_activity(request):
             request.FILES.get("attachproof2")
         ]
         details = {
-            'studentname': request.POST.get("studentname"),
-            'facultyname': request.POST.get("facultyname"),
-            'coursetitle': request.POST.get("coursetitle"),
-            'fromdate': request.POST.get("fromdate"),
-            'todate': request.POST.get("todate"),
-            'mentorname': request.POST.get("mentorname"),
+            'student_name': request.POST.get("studentname"),
+            'faculty_name': request.POST.get("facultyname"),
+            'course_title': request.POST.get("coursetitle"),
+            'from_date': request.POST.get("fromdate"),
+            'to_date': request.POST.get("todate"),
+            'mentor_name': request.POST.get("mentorname"),
         }
 
 # Activite name 10
@@ -664,7 +667,16 @@ def submit_activity(request):
         return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
     
     
+
 def dashboard(request):
     current_user = CreateUser.objects.get(username=request.user)
     print(current_user.reports_to.id)
     return render(request,"faculty/dashboard.html",{'user':current_user})
+
+
+def serve_pdf(request, filename):
+    filepath = os.path.join(settings.MEDIA_ROOT, 'proofs', filename) # Adjust path as needed
+    if not os.path.exists(filepath):
+        raise Http404("PDF file not found.")
+    
+    return FileResponse(open(filepath, 'rb'), content_type='application/pdf')

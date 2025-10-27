@@ -13,5 +13,5 @@ urlpatterns = [
     path('submit-activity/', submit_activity, name='submit_activity'),
     path('dashboard/', Home, {'content': 'dashboard'}, name='dashboard'),
     path("__reload__/", include("django_browser_reload.urls")),
-    
+    path('home/proofs/<str:filename>/', serve_pdf, name='serve_pdf'),
 ]
