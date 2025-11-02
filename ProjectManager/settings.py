@@ -28,7 +28,7 @@ DEBUG = True
 AUTH_USER_MODEL = 'AppraisalProject.CreateUser'
 
 
-ALLOWED_HOSTS = ['192.168.222.163', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.59.163', '127.0.0.1','localhost']
 
 
 MEDIA_URL = "/media/"
@@ -123,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 

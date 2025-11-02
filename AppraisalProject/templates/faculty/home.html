@@ -5,25 +5,45 @@
 <div class="row g-0">
     <!-- Top Bar -->
     <div class="col-12">
-        <div class="topBar bg-primary text-center py-2 shadow-sm">
+        <div class="topBar bg-primary text-center py-2 shadow-sm d-flex justify-content-md-center align-items-center">
+            <a class="btn d-md-none m-3 text-white" role="button" data-bs-toggle="offcanvas" data-bs-target="#menuCanvas">
+                <i class="bi bi-list"></i>
+            </a>
             <h2 class="text-white mb-0">Faculty Appraisal Data AY ({{ acadYear }})</h2>
         </div>
     </div>
 
     <!-- Sidebar -->
 
-    <div class="col-3 col-md-2 bg-secondary text-white p-3 vh-100">
-        <h5 class="mb-3">Menu</h5> 
-        <ul class="list-unstyled">
+
+<!-- Offcanvas Menu -->
+<div class="offcanvas offcanvas-start bg-secondary text-white" tabindex="-1" id="menuCanvas">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title bg-success text-center w-100 py-2">Menu</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body text-center">
+    <ul class="list-unstyled">
+      <li class="mb-2"><a href="{% url 'dashboard' %}" class="text-white text-decoration-none">Dashboard</a></li>
+      <li class="mb-2"><a href="{% url 'activity' %}" class="text-white text-decoration-none">Submit Activity</a></li>
+      <li class="mb-2"><a href="#" class="text-white text-decoration-none">Reports</a></li>
+      <li class="mb-2"><a href="#" class="text-white text-decoration-none">Settings</a></li>
+    </ul>
+  </div>
+</div>
+
+    <div class="d-none d-md-block col-md-3 bg-secondary text-white p-3 vh-100">
+        <h5 class="mb-3 text-center bg-success">Menu</h5> 
+        <ul class="list-unstyled text-center">
             <li class="mb-2"><a href={% url 'dashboard' %} class="text-white text-decoration-none">Dashboard</a></li>
-            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Faculty Data</a></li>
+            <li class="mb-2"><a href={% url 'activity' %} class="text-white text-decoration-none">Submit Activity</a></li>
             <li class="mb-2"><a href="#" class="text-white text-decoration-none">Reports</a></li>
             <li class="mb-2"><a href="#" class="text-white text-decoration-none">Settings</a></li>
         </ul>
     </div>
 
     <!-- Main Content -->
-    <div class="col-9 col-md-10 p-4">
+    <div class="col-12 col-md-9 p-4">
         <!-- User Info -->
         <div class="container-fluid mb-3">
             <div class="d-flex flex-wrap justify-content-between align-items-center bg-light p-3 rounded shadow-sm">
@@ -34,58 +54,12 @@
         </div>
 
         <!-- Dashboard Content -->
-            {% if content == None %}
+            {% if content == 'activity' %}
         <div class="content bg-white p-4 rounded shadow-sm">
             <h4 class="mb-3">Hello {{ user.username }} 👋</h4>
             <p>This is your faculty appraisal dashboard. Use the menu to navigate.</p>
-            <div class="d-flex justify-content-center ">
-                <div class="card  border-dark w-75" style="max-width: fit-content;">
-                    <div class="card-body">
-                        {% if not submitted and not activitySubmitted %}
-                            <form action="" method="post" class="d-flex flex-column">
-                                {% csrf_token %}
-                                <label for="department">Department:</label>
-                                <select id="department" name="department" class="form-select mb-3">
-                                    {% for dept in departments %}
-                                        <option value="{{ dept }}">{{ dept }}</option>
-                                    {% endfor %}
-                                </select>
-                                <label for="month">Month:</label>
-                               <select name="month" class="form-select mb-3">
-                                    {% for m in months %}
-                                        <option value="{{ m }}">{{ m }} </option>
-                                    {% endfor %}
-                                    </select>
-
-                                <label for="activityName">Activity Name:</label>
-                                <select name="activityName" id="activityName" class="form-select mb-3">
-                                    {% for activity in activities %}
-                                        <option value="{{ activity.id }}">{{ activity }}</option>
-                                    {% endfor %}
-                                </select>
-                                <button type="submit" class="btn btn-primary w-50 m-auto">Submit</button>
-                            </form>
-                        {% elif not activitySubmitted%}
-                            {% include 'activity/'|add:activityName|add:'.html' %}
-                         {% elif activitySubmitted and not error %}
-                            <div class="alert alert-success" role="alert">
-                                Your response has been submitted successfully!
-                                <br>
-                                <br>
-                                <a href="{% url 'home' %}" class="alert-link">Go back to home</a>
-                            </div>
-                        {% elif activitySubmitted and error %}
-                            
-                         {% if messages %}
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {% for message in messages %}
-                                        <p>{{ message }}</p>
-                                    {% endfor %}                                </div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+            
+               {% include "faculty/activity.html" %}
         </div>
             {% elif content == 'dashboard' %}
                {% include "faculty/dashboard.html" %}

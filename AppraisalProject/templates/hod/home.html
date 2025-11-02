@@ -10,7 +10,7 @@
   </div>
 
   <!-- Sidebar -->
-  <div class="col-3 col-md-2 bg-secondary text-white p-3 vh-100">
+  <div class="col-3 col-md-2 bg-secondary text-white p-3" style="min-height: 100vh"> 
     <h5 class="mb-3 text-uppercase fw-bold">Menu</h5>
     <ul class="list-unstyled">
       <li class="mb-2">
@@ -110,7 +110,7 @@
             </div>
 
             <div class="card-body">
-              {% if activities_submitted_today %}
+              {% if page_obj %}
               <div class="table-responsive">
                 <table class="table table-striped align-middle text-center">
                   <thead class="table-dark">
@@ -122,7 +122,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for activity in activities_submitted_today %}
+                    {% for activity in page_obj %}
                     <!-- Activity Row -->
                     <tr>
                       <td>{{ activity.user.username }}</td>
@@ -162,7 +162,11 @@
                               Submitted for the month of
                               <span class="fw-bold">{{activity.month}}</span>
                             </p>
-                            <a href="{{activity.merged_proof}}">View Proof</a>
+                            {% if activity.merged_proof %}
+                            <strong>Proof :</strong> <a href="{{activity.merged_proof}}" target="_blank" class='text-decoration-none'>View Proof</a>
+                            {% else %}
+                            <p>No Proof Available</p>
+                            {% endif %}
                             {% for detail, value in activity.detail.items %} 
                             {% if value %}
                             <p>
@@ -176,8 +180,37 @@
                     {% endfor %}
                   </tbody>
                 </table>
+                <!-- Pagination Controls -->
+                <nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">Previous</span></li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">Next</span></li>
+    {% endif %}
+  </ul>
+</nav>
               </div>
               {% else %}
+
               <p class="text-center mb-0 text-muted">
                 No submissions made today !
               </p>

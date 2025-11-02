@@ -1,9 +1,8 @@
 import calendar
 from urllib import request
 from django.http import FileResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
-from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -12,6 +11,7 @@ from django.core.files.base import ContentFile
 from .utils import merge_uploads_to_pdf
 from datetime import datetime
 from django.conf import settings
+from django.core.paginator import Paginator
 
 
 
@@ -22,7 +22,7 @@ def Login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Invalid Username or password')
             return render(request, 'login.html')
@@ -39,6 +39,7 @@ def Home(request, content=None):
     month = request.POST.get('month')
     activityName = None
     submitted = False
+    print("Content in Home:", repr(content))
     
 
     if request.method == 'POST':
@@ -58,8 +59,11 @@ def Home(request, content=None):
         activities_submitted_this_year = ActivitySubmission.objects.filter(user__department=request.user.department, created_at__year=datetime.now().year).count()
         try:
             #activities_submitted_today = None
-            activities_submitted_today = ActivitySubmission.objects.filter(user__department=request.user.department, created_at__month=datetime.now().month)
-            print(activities_submitted_today)        
+            activities_submitted_today = ActivitySubmission.objects.filter(user__department=request.user.department, created_at__date=datetime.now().date()).order_by('-created_at')
+            paginator = Paginator(activities_submitted_today, 5)  # 10 per page
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+                # print(activities_submitted_today)        
         except ActivitySubmission.DoesNotExist:
             activities_submitted_today = None
         return render(request, 'hod/home.html',
@@ -67,12 +71,17 @@ def Home(request, content=None):
                        'totalFaculty': totalFaculty,
                        'activities_submitted_this_month': activities_submitted_this_month,
                        'activities_submitted_this_year': activities_submitted_this_year,
-                       'activities_submitted_today': activities_submitted_today,
-                       'acadYear': acadYear})
+                    #    'activities_submitted_today': activities_submitted_today,
+                       'acadYear': acadYear,
+                       'page_obj': page_obj})
 
     elif request.user.role == 'faculty':
         if content=='dashboard':
-            monthly_submissions = ActivitySubmission.objects.filter(user=request.user, created_at__month=datetime.now().month)
+            yearly_submissions = ActivitySubmission.objects.filter(user=request.user, created_at__year=datetime.now().year)
+            monthly_submissions = ActivitySubmission.objects.filter(user=request.user, created_at__month=datetime.now().month).order_by('-created_at')
+            paginator = Paginator(monthly_submissions, 5)  # 10 per page
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
         return render(
             request,
             'faculty/home.html',
@@ -88,7 +97,8 @@ def Home(request, content=None):
                 'activityName': activityName,
                 'content': content,
                 'monthly_submissions': monthly_submissions if content=='dashboard' else None,
-                
+                'yearly_submissions': yearly_submissions if content=='dashboard' else None,
+                'page_obj': page_obj if content=='dashboard' else None,
                 
             },
         )
@@ -660,19 +670,12 @@ def submit_activity(request):
                 detail=details,
                 merged_proof=merged_file_field,
         )
-        return render(request, 'faculty/home.html', {'activitySubmitted': True, 'activityName': activityName})
+        return render(request, 'faculty/home.html', {'activitySubmitted': True, 'activityName': activityName ,'content':'activity'})
     except Exception as e:
         messages.error(request, 'There was an error submitting your activity. Please try again.')
         print(e)
-        return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True})
+        return render(request, 'faculty/home.html', {'activitySubmitted': True, 'error': True, 'content':'activity'})
     
-    
-
-def dashboard(request):
-    current_user = CreateUser.objects.get(username=request.user)
-    print(current_user.reports_to.id)
-    return render(request,"faculty/dashboard.html",{'user':current_user})
-
 
 def serve_pdf(request, filename):
     filepath = os.path.join(settings.MEDIA_ROOT, 'proofs', filename) # Adjust path as needed
